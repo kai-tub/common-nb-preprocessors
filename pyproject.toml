@@ -1,0 +1,85 @@
+[project]
+name = "common-nb-preprocessors"
+version = "0.1.0"
+description = "preprocessors"
+authors = [
+    {name = "Kai Norman Clasen", email= "<k.clasen@protonmail.com>"},
+]
+license = {text = "MIT license"}
+readme = "README.md"
+#- Uses the < syntax instead of <= because conda-forge does not work correctly with <=
+requires-python = ">=3.8, <3.11"
+dependencies = [
+    "nbformat>=5.4.0",
+    "nbconvert>=6.5.0",
+    "rich>=12.4.4",
+]
+
+[project.urls]
+homepage = "https://github.com/kai-tub/common-nb-preprocessors/"
+repository = "https://github.com/kai-tub/common-nb-preprocessors/"
+documentation = "https://github.com/kai-tub.github.io/common-nb-preprocessors"
+
+[project.optional-dependencies]
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
+
+[tool.pdm.build]
+includes = ["LICENSE"]
+
+[tool.pdm.dev-dependencies]
+docs = [
+    "myst-nb<1.0,>=0.16",
+    "Sphinx<6.0,>=4.5",
+    "sphinx-autobuild",
+    "sphinx-external-toc",
+    "linkify-it-py",
+    "furo",
+]
+test = [
+    "pytest",
+    "pre-commit",
+    "jupyter",
+    "notebook",
+]
+lint = [
+    "black",
+    "isort",
+    "nbstripout",
+    "mypy",
+]
+dev = [
+    "html5lib>=1.1",
+    "pandas>=1.4.3",
+    "lxml>=4.9.1",
+]
+[tool.mypy]
+exclude = ["tests"]
+# common plugins:
+# plugins = "numpy.typing.mypy_plugin"
+
+[tool.isort]
+profile = "black"
+
+
+
+[tool.pdm.scripts]
+black = "black ."
+isort = "isort ."
+
+mypy = "mypy ."
+lint.composite = [
+    "black",
+    "isort",
+    "mypy",
+]
+lint.help = "Will check if all files are formatted with black & isort"
+
+build-docs.cmd = "sphinx-build docs docs/_build/"
+build-docs.help = "Build Sphinx documentation"
+serve-sphinx-docs.cmd = "sphinx-autobuild docs docs/_build --open-browser"
+serve-sphinx-docs.help = "Serve the Sphinx documentation with sphinx-autobuild"
+
+tests.cmd = "pytest tests/"
+tests.help = "Call test-runner"

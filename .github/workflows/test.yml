@@ -1,0 +1,36 @@
+name: Test
+on:
+  push:
+    branches: [main]
+    paths:
+      - "common_nb_preprocessors/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "common_nb_preprocessors/**"
+
+jobs:
+  test:
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.8","3.9","3.10"]
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python and PDM
+        uses: pdm-project/setup-pdm@main
+        with:
+          python-version: 3.8
+      - name: Check precommit
+        run: |
+          pdm run pre-commit run --all-files
+      - name: Test mypy
+        run: |
+          pdm run mypy common_nb_preprocessors
+      - name: Run tests from within PDM
+        run: |
+          pdm run tests
