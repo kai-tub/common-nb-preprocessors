@@ -1,3 +1,5 @@
 root: intro
 entries:
+  - file: motivation
+  - file: usage
   - file: api

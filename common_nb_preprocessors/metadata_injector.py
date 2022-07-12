@@ -15,32 +15,57 @@ __all__ = [
 
 class MetaDataInjectorPreprocessor(Preprocessor):
     """
-    Parse all *code* cells and convert the given `strings` with the
+    Parse all *code* cells and convert the matched `strings` with the
     `prefix` to the `metadata_group`, which is the `tags` list by default.
+    These `strings` must be on their own line and only contain the `prefix`
+    a `string` from `strings` and whitespace characters.
 
-    With `remove_line=True` (default) the matched `strings` will be removed from
+    With `remove_line=True` (default) the matched line will be removed from
     the output.
 
-    By default a code cell with the contents:
+    With the `Preprocessor` configured as:
 
-    ```python
-    # hide
-    import os
-    ```
+    - `metadata_group="tags"`
+    - `strings=["hide"]`
+    - `remove_line=True`
 
-    Will be transformed to:
+    the code cell with the contents:
 
-    ```python
-    import os
-    ```
+    .. code-block:: python
 
-    where the code cell's metadata `tags` field contains the additional entry `hide`.
+        # hide
+        import os
+
+    and the following notebook metadata json:
+
+    .. code-block:: json
+
+        {"metadata": {}}
+
+    Will be transformed to the code-cell with the contents:
+
+    .. code-block:: python
+
+        import os
+
+    and the metadata set as:
+
+    .. code-block:: json
+
+        {"metadata": {"tags": ["hide"]}}
+
+    All matched `strings` (also sometimes called *magic* comments)
+    will be *appended* to the `metadata_group` list if it already exists.
     """
 
-    strings = List(Unicode(), default_value=[]).tag(config=True)
-    prefix = Unicode(default_value="#").tag(config=True)
     metadata_group = Unicode(default_value="tags").tag(config=True)
+    """Metadata group into which the matched `strings` will be written."""
+    strings = List(Unicode(), default_value=[]).tag(config=True)
+    """List of strings (magic comments) that define the text that will be matched and injected into the selected metadata group."""
+    prefix = Unicode(default_value="#").tag(config=True)
+    """The prefix that indicates the possible start of a magic comment line. Should be comment character of the language."""
     remove_line = Bool(default_value=True).tag(config=True)
+    """By default remove the matching line in the code-cell."""
 
     def _write_tag(self, tag, cell):
         tags = cell.setdefault("metadata", {}).setdefault(self.metadata_group, [])
@@ -50,6 +75,7 @@ class MetaDataInjectorPreprocessor(Preprocessor):
         return cell
 
     def preprocess_cell(self, cell, resource, index):
+        """Inject metadata to code-cell if match is found"""
         if cell["cell_type"] == "markdown":
             return cell, resource
         for string in self.strings:
@@ -87,7 +113,7 @@ class GlobalMetaDataInjectorPreprocessor(Preprocessor):
     import os
     ```
 
-    where the _notebook's_ cell's metadata `publish` field may be created and contain the additional entry `true`.
+    where the _notebooks_ cell metadata `publish` field may be created and contain the additional entry `true`.
 
     To only add a specific value to a metadata field (usually `tags`) look at `MetaDataInjectorPreprocessor`.
     """

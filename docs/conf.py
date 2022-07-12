@@ -59,11 +59,19 @@ myst_enable_extensions = [
     "substitution",
     "tasklist",
 ]
+# enable-start
+nb_custom_formats = {".ipynb": "common_nb_preprocessors.myst_nb_metadata_injector"}
+# enable-end
 source_suffix = {".ipynb": "myst-nb", ".md": "myst-nb"}
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "jupyter_execute"]
+
+intersphinx_mapping = {
+    "nbconvert": ("https://nbconvert.readthedocs.io/en/latest/", None),
+    "mystnb": ("https://myst-nb.readthedocs.io/en/latest/", None),
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]

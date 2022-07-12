@@ -28,6 +28,11 @@ build-backend = "pdm.pep517.api"
 [tool.pdm.build]
 includes = ["LICENSE"]
 
+# I _think_ the minimum myst-nb version for which this works
+# is v0.14, which was the big rewrite release
+# As of now, jupyter-book requires myst-nb=0.13
+# https://github.com/executablebooks/jupyter-book/blob/master/pyproject.toml
+# This doesn't allow the default config to be used to overwrite the ipynb reader
 [tool.pdm.dev-dependencies]
 docs = [
     "myst-nb<1.0,>=0.16",
@@ -53,7 +58,7 @@ dev = [
     "html5lib>=1.1",
     "pandas>=1.4.3",
     "lxml>=4.9.1",
-]
+    "jupyter-book>=0.6.5"]
 [tool.mypy]
 exclude = ["tests"]
 # common plugins:
