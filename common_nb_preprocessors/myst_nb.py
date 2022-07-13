@@ -1,6 +1,9 @@
 import nbformat
 
-from .metadata_injector import MetaDataInjectorPreprocessor
+from .metadata_injector import (
+    MetaDataListInjectorPreprocessor,
+    MetaDataMapInjectorPreprocessor,
+)
 
 __all__ = [
     "JUPYTER_BOOK_CODE_TAGS",
@@ -48,7 +51,7 @@ JUPYTER_BOOK_CODE_TAGS = [
 
 
 def myst_nb_metadata_injector(
-    file_content: str, prefix: str = "#", remove_line: bool = True
+    file_content: str, prefix: str = "#", remove_line: bool = True, delimiter="\s*=\s*"
 ):
     """
     The preprocessor will inject all the myst-nb specific tags into the
@@ -65,16 +68,20 @@ def myst_nb_metadata_injector(
         remove_line (bool, optional): Set if the metadata comment lines should be removed after injection. Defaults to True.
     """
     nb = nbformat.reads(file_content, as_version=4)
-    for metadata_group, magic_strings in (
-        ("tags", MYST_NB_CELL_TAGS),
-        ("mystnb", MYST_NB_CELL_CONF),
-    ):
-        nb, _ = MetaDataInjectorPreprocessor(
-            metadata_group=metadata_group,
-            strings=magic_strings,
-            prefix=prefix,
-            remove_line=remove_line,
-        ).preprocess(nb, None)
+    # could be done in one preprocess step
+    nb, _ = MetaDataListInjectorPreprocessor(
+        metadata_group="tags",
+        strings=MYST_NB_CELL_TAGS,
+        prefix=prefix,
+        remove_line=remove_line,
+    ).preprocess(nb, None)
+    nb, _ = MetaDataMapInjectorPreprocessor(
+        metadata_group="mystnb",
+        keys=MYST_NB_CELL_CONF,
+        prefix=prefix,
+        remove_line=remove_line,
+        delimiter=delimiter,
+    ).preprocess(nb, None)
     return nb
 
 
@@ -96,7 +103,7 @@ def jupyter_book_metadata_injector(
         remove_line (bool, optional): Set if the metadata comment lines should be removed after injection. Defaults to True.
     """
     inp_nb = nbformat.reads(file_content, as_version=4)
-    nb, _ = MetaDataInjectorPreprocessor(
+    nb, _ = MetaDataListInjectorPreprocessor(
         strings=JUPYTER_BOOK_CODE_TAGS, prefix=prefix, remove_line=remove_line
     ).preprocess(inp_nb, None)
     return nb

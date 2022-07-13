@@ -5,10 +5,10 @@ This library provides a collection of useful [Preprocessors](/nbconvert_library.
 - [](global_metadata_injector)
 
 
-(metadata_injector)=
-## MetaDataInjector
+(metadata_list_injector)=
+## MetaDataListInjector
 :::{eval-rst}
-.. autoclass:: common_nb_preprocessors.metadata_injector.MetaDataInjectorPreprocessor
+.. autoclass:: common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor
     :members:
 :::
 

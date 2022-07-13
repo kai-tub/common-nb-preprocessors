@@ -50,7 +50,8 @@ def build_prefixed_regex_pattern_with_value(
         {delimiter}
         (?P<value>[^\n\r]+)
         $ # match end of each line (excludes \n in MULTILINE)
+        [\r\n]* # Capture current and all following empty newlines
         """,
-        re.VERBOSE,
+        re.VERBOSE | re.MULTILINE,
     )
     return pattern
