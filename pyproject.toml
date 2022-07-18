@@ -1,6 +1,6 @@
 [project]
 name = "common-nb-preprocessors"
-version = "0.0.10"
+version = "0.1.0"
 description = "preprocessors"
 authors = [
     {name = "Kai Norman Clasen", email= "<k.clasen@protonmail.com>"},
