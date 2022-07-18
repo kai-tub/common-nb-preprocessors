@@ -22,32 +22,32 @@ class MystNBCellTags(str, Enum):
     remove_input = "remove-input"
     """
     Removes the source code of the cell.
-    See :ref:`remove-input` for a visual example.
+    See :ref:`sec/remove-input` for a visual example.
     """
     remove_stderr = "remove-stderr"
     """
     Only remove the standard error output of the code cell.
-    See :ref:`remove-stderr` for a visual example.
+    See :ref:`sec/remove-stderr` for a visual example.
     """
     remove_output = "remove-output"
     """
     Remove the output of the code cell.
-    See :ref:`remove-output` for a visual example.
+    See :ref:`sec/remove-output` for a visual example.
     """
     remove_cell = "remove-cell"
     """
     Remove the input as well as the output of the code cell.
-    See :ref:`remove-cell` for a visual example.
+    See :ref:`sec/remove-cell` for a visual example.
     """
     raises_exception = "raises-exception"
     """
     Continue execution normally if code cell raises exception.
-    See :ref:`raises-exception` for a visual example.
+    See :ref:`sec/raises-exception` for a visual example.
     """
     skip_execution = "skip-execution"
     """
     Do not execute code cell.
-    See :ref:`skip-execution` for a visual example.
+    See :ref:`sec/skip-execution` for a visual example.
     """
 
     def __str__(self):
@@ -67,21 +67,21 @@ class MystNBCellConf(str, Enum):
     """
     Remove the code cell.
     Should be paired with a boolean: `true`/`false`.
-    See :ref:`remove_code_source` for a visual example.
+    See :ref:`sec/remove_code_source` for a visual example.
     """
 
     remove_code_outputs = "remove_code_outputs"
     """
     Remove the output of the cell.
     Should be paired with a boolean: `true`/`false`.
-    See :ref:`remove_code_outputs` for a visual example.
+    See :ref:`sec/remove_code_outputs` for a visual example.
     """
 
     number_source_lines = "number_source_lines"
     """
     Add source line numbering to the current cell.
     Should be paired with a boolean: `true`/`false`.
-    See :ref:`number_source_lines` for a visual example.
+    See :ref:`sec/number_source_lines` for a visual example.
     """
 
     output_stderr = "output_stderr"
@@ -94,7 +94,7 @@ class MystNBCellConf(str, Enum):
     - `remove-warn`: Remove the standard error output but log a warning to Sphinx
     - `warn`/`error`/`severe`: Log the error with a specific logging level to Sphinx
 
-    See :ref:`output_stderr` for a visual example.
+    See :ref:`sec/output_stderr` for a visual example.
     """
 
     merge_streams = "merge_streams"
@@ -102,7 +102,7 @@ class MystNBCellConf(str, Enum):
     Merge standard output and standard error into a single output cell.
     Should be paired with a boolean: `true`/`false`.
 
-    See :ref:`merge_streams` for a visual example.
+    See :ref:`sec/merge_streams` for a visual example.
     """
 
     text_lexer = "text_lexer"
@@ -110,7 +110,7 @@ class MystNBCellConf(str, Enum):
     Pygments lexer applied to standard out, standard error and text/plain outputs.
     Should be paired with a Pygments lexer string.
 
-    See :ref:`text_lexer` for a visual example.
+    See :ref:`sec/text_lexer` for a visual example.
     """
 
     error_lexer = "error_lexer"
@@ -118,7 +118,7 @@ class MystNBCellConf(str, Enum):
     Pygments lexer applied to the error/traceback outputs.
     Should be paired with a Pygments lexer string.
 
-    See :ref:`error_lexer` for a visual example.
+    See :ref:`sec/error_lexer` for a visual example.
     """
 
     markdown_format = "markdown_format"
@@ -130,7 +130,7 @@ class MystNBCellConf(str, Enum):
     - `gfm`
     - `myst`
 
-    See :ref:`markdown_format` for a visual example.
+    See :ref:`sec/markdown_format` for a visual example.
     """
 
     image = "image"
@@ -138,7 +138,7 @@ class MystNBCellConf(str, Enum):
     Options for image outputs.
 
 
-    See :ref:`image` for a visual example.
+    See :ref:`sec/image` for a visual example.
     """
 
     figure = "figure"
@@ -147,7 +147,7 @@ class MystNBCellConf(str, Enum):
     To see a list of all possible configuration values,
     take a look at the `official figure documentation <https://myst-nb.readthedocs.io/en/latest/render/format_code_cells.html#images-and-figures>`_.
 
-    See :ref:`figure` for a visual example.
+    See :ref:`sec/figure` for a visual example.
     """
 
     def __str__(self):
