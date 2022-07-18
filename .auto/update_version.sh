@@ -28,7 +28,7 @@ if [[ "$bumpType" = "patch" ]]; then
     bumpType="micro"
 fi
 # bump version
-poetry version "$bumpType"
+pdm bump "$bumpType"
 
 
 # Files will be commited via `auto` tool
