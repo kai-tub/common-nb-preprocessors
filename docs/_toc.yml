@@ -1,5 +1,9 @@
 root: intro
 entries:
-  - file: motivation
   - file: usage
-  - file: api
+  - file: preprocessors
+  - file: utility_reference
+  - file: credits
+  - file: general/dependencies
+  - file: general/code_of_conduct
+  - file: general/license

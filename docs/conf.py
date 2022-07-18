@@ -32,6 +32,8 @@ extensions = [
     "sphinx_external_toc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.autodoc",
+    "sphinx_design",
+    # "sphinx.ext.doctest",
     # Other popular choices:
     # "myst_parser",
     # "sphinx_cli_recorder",
@@ -60,8 +62,23 @@ myst_enable_extensions = [
     "tasklist",
 ]
 # enable-start
-nb_custom_formats = {".ipynb": "common_nb_preprocessors.myst_nb_metadata_injector"}
+nb_custom_formats = {
+    ".ipynb": [
+        "common_nb_preprocessors.myst_nb_metadata_injector",
+        {"prefix": "#", "delimiter": "="},
+    ]
+}
 # enable-end
+
+default_role = "py:obj"
+
+myst_substitutions = {
+    "mystnb": "[MyST-NB](https://myst-nb.readthedocs.io/en/latest/index.html)",
+}
+
+autodoc_typehints = "description"
+autodoc_class_signature = "separated"
+
 source_suffix = {".ipynb": "myst-nb", ".md": "myst-nb"}
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

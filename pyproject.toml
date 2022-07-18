@@ -7,13 +7,16 @@ authors = [
 ]
 license = {text = "MIT license"}
 readme = "README.md"
+
 #- Uses the < syntax instead of <= because conda-forge does not work correctly with <=
+# deps-start
 requires-python = ">=3.8, <3.11"
 dependencies = [
     "nbformat>=5.4.0",
     "nbconvert>=6.5.0",
-    "rich>=12.4.4",
+    "pydantic>=1.9.1",
 ]
+# deps-end
 
 [project.urls]
 homepage = "https://github.com/kai-tub/common-nb-preprocessors/"
@@ -41,6 +44,7 @@ docs = [
     "sphinx-external-toc",
     "linkify-it-py",
     "furo",
+    "rich>=12.5.1",
 ]
 test = [
     "pytest",
@@ -58,7 +62,10 @@ dev = [
     "html5lib>=1.1",
     "pandas>=1.4.3",
     "lxml>=4.9.1",
-    "jupyter-book>=0.6.5"]
+    "jupyter-book>=0.6.5",
+    "sphinx-design>=0.2.0",
+    "hypothesis>=6.50.1",
+]
 [tool.mypy]
 exclude = ["tests"]
 # common plugins:

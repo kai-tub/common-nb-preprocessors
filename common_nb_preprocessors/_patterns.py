@@ -1,9 +1,14 @@
 import re
 
+from pydantic import constr, validate_arguments
+
 __all__ = ["build_prefixed_regex_pattern", "build_prefixed_regex_pattern_with_value"]
 
 
-def build_prefixed_regex_pattern(prefix: str, key_term: str) -> re.Pattern:
+@validate_arguments
+def build_prefixed_regex_pattern(
+    *, prefix: constr(min_length=1), key_term: constr(min_length=1)
+) -> re.Pattern:
     """
     A regular expression builder that returns a compiled
     regular expression that matches a string if:
@@ -29,25 +34,30 @@ def build_prefixed_regex_pattern(prefix: str, key_term: str) -> re.Pattern:
     return pattern
 
 
+@validate_arguments
 def build_prefixed_regex_pattern_with_value(
-    prefix: str, key_term: str, delimiter=r"\s*"
+    *,
+    prefix: constr(min_length=1),
+    key_term: constr(min_length=1),
+    delimiter: constr(min_length=1) = "=",
 ) -> re.Pattern:
     """
     A regular expression builder that returns a compiled
-    regular expression that matches a string if:
-    - An escaped `prefix` string (may have whitespaces before or after)
-    - The escape `key_term` to capture with the group name `key`
-    - Followed by an *unescaped* `delimiter`
+    regular expression that matches a string with:
+    - The (escaped) `prefix` string (may have whitespaces before or after)
+    - The (escaped) `key_term` to capture with the group name `key` is
+    - Followed by an (escaped) `delimiter` (may have whitespaces before or after)
     - and captures the following line until the end of the line with the group name `value`
     """
     prefix = re.escape(prefix)
     key_term = re.escape(key_term)
+    delimiter = re.escape(delimiter)
     pattern = re.compile(
         rf"""
         ^ # match start of each line
         \s*{prefix}\s* # allow whitespace before and after prefix
         (?P<key>{key_term}) # term to capture
-        {delimiter}
+        \s*{delimiter}\s* # allow whitespace before and after delimiter
         (?P<value>[^\n\r]+)
         $ # match end of each line (excludes \n in MULTILINE)
         [\r\n]* # Capture current and all following empty newlines
