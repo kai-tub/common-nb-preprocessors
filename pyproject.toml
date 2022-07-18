@@ -21,7 +21,7 @@ dependencies = [
 [project.urls]
 homepage = "https://github.com/kai-tub/common-nb-preprocessors/"
 repository = "https://github.com/kai-tub/common-nb-preprocessors/"
-documentation = "https://github.com/kai-tub.github.io/common-nb-preprocessors"
+documentation = "kai-tub.github.io/common-nb-preprocessors/"
 
 [project.optional-dependencies]
 [build-system]
