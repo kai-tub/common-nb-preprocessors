@@ -19,7 +19,5 @@ jobs:
         run: |
           pdm sync --dev --group docs
           pdm run build-docs
-      - name: Build package
-        run: pdm publish
       - name: Publish
         run: pdm publish --username ${{ secrets.PYPI_USER }} --password ${{ secrets.PYPI_PWD }}
