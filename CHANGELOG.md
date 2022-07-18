@@ -1,3 +1,15 @@
+# v0.1.2 (Mon Jul 18 2022)
+
+#### 🐛 Bug Fix
+
+- Fix docstring links pointing to visual examples [#3](https://github.com/kai-tub/common-nb-preprocessors/pull/3) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v0.1.1 (Mon Jul 18 2022)
 
 #### 🐛 Bug Fix
