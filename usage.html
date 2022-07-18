@@ -279,9 +279,9 @@ The main issue with that approach is that some tools have a hard time working wi
 </div>
 <p>The <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/index.html">MyST-NB</a> library provides two ways to configure the execution/rendering process of a code cell.
 One is to <em>add</em> specific strings to the <code class="docutils literal notranslate"><span class="pre">tags</span></code> metadata list.
-See <a class="reference internal" href="#tags-conf"><span class="std std-ref">Tag configuration</span></a> for details on what is possible with this configuration method.
+See <a class="reference internal" href="#sec-tags-conf"><span class="std std-ref">Tag configuration</span></a> for details on what is possible with this configuration method.
 The other configuration method is to <em>set</em> key-value pairs inside of the <code class="docutils literal notranslate"><span class="pre">mystnb</span></code> metadata tag of the code-cell.
-See <a class="reference internal" href="#mystnb-conf"><span class="std std-ref">Myst-NB Metadata Configuration</span></a> for details.
+See <a class="reference internal" href="#sec-mystnb-conf"><span class="std std-ref">Myst-NB Metadata Configuration</span></a> for details.
 Note that the things you can configure are <em>mostly</em> different between both of these methods! You should take a look at <em>both</em>!</p>
 <p>If the last paragraph confused you, don’t worry.
 It is probably not that important for you as it discusses the <em>conceptual</em> difference between the two configuration options.
@@ -289,15 +289,15 @@ The important thing to know is that the <code class="docutils literal notranslat
 You will see how this effects the configuration in the following sections.</p>
 </section>
 <section id="tag-configuration">
-<span id="tags-conf"></span><h2>Tag configuration<a class="headerlink" href="#tag-configuration" title="Permalink to this headline">#</a></h2>
+<span id="sec-tags-conf"></span><h2>Tag configuration<a class="headerlink" href="#tag-configuration" title="Permalink to this headline">#</a></h2>
 <p>At the time of writing, the following configuration keywords can be set in the <code class="docutils literal notranslate"><span class="pre">tags</span></code> metadata entry of a Jupyter code-cell:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#remove-input"><span class="std std-ref">remove-input</span></a></p></li>
-<li><p><a class="reference internal" href="#remove-stderr"><span class="std std-ref">remove-stderr</span></a></p></li>
-<li><p><a class="reference internal" href="#remove-output"><span class="std std-ref">remove-output</span></a></p></li>
-<li><p><a class="reference internal" href="#remove-cell"><span class="std std-ref">remove-cell</span></a></p></li>
-<li><p><a class="reference internal" href="#skip-execution"><span class="std std-ref">skip-execution</span></a></p></li>
-<li><p><a class="reference internal" href="#raises-exception"><span class="std std-ref">raises-exception</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-remove-input"><span class="std std-ref">remove-input</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-remove-stderr"><span class="std std-ref">remove-stderr</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-remove-output"><span class="std std-ref">remove-output</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-remove-cell"><span class="std std-ref">remove-cell</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-skip-execution"><span class="std std-ref">skip-execution</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-raises-exception"><span class="std std-ref">raises-exception</span></a></p></li>
 </ul>
 <p>For more details, see the <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">tags</span></code> section of the <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/configuration.html" title="(in MyST-NB)"><span class="xref std std-doc">MyST configuration documentation</span></a>.</p>
 <section id="no-match-example">
@@ -325,7 +325,7 @@ You will see how this effects the configuration in the following sections.</p>
 <p>Not so surprisingly, nothing much happens with those code-cells. They are simply executed and rendered as-is.</p>
 </section>
 <section id="remove-input">
-<span id="id2"></span><h3>remove-input<a class="headerlink" href="#remove-input" title="Permalink to this headline">#</a></h3>
+<span id="sec-remove-input"></span><h3>remove-input<a class="headerlink" href="#remove-input" title="Permalink to this headline">#</a></h3>
 <p>Removes the source code of the cell.
 Useful if you are only interested in the output.</p>
 <p>Source:</p>
@@ -343,7 +343,7 @@ Useful if you are only interested in the output.</p>
 </div>
 </section>
 <section id="remove-stderr">
-<span id="id3"></span><h3>remove-stderr<a class="headerlink" href="#remove-stderr" title="Permalink to this headline">#</a></h3>
+<span id="sec-remove-stderr"></span><h3>remove-stderr<a class="headerlink" href="#remove-stderr" title="Permalink to this headline">#</a></h3>
 <p>Only remove the standard error output of the code cell.
 This is useful if an underlying library uses <code class="docutils literal notranslate"><span class="pre">stderr</span></code> to print progress or other debug messages that would only pollute the output for the documentation.</p>
 <p>Source:</p>
@@ -371,7 +371,7 @@ This is useful if an underlying library uses <code class="docutils literal notra
 </div>
 </section>
 <section id="remove-output">
-<span id="id4"></span><h3>remove-output<a class="headerlink" href="#remove-output" title="Permalink to this headline">#</a></h3>
+<span id="sec-remove-output"></span><h3>remove-output<a class="headerlink" href="#remove-output" title="Permalink to this headline">#</a></h3>
 <p>Remove the output of the code cell (duh).
 Useful to hide some warning during important without having filter the messages or to hide visual output.</p>
 <p>Source:</p>
@@ -394,7 +394,7 @@ Useful to hide some warning during important without having filter the messages 
 </div>
 </section>
 <section id="remove-cell">
-<span id="id5"></span><h3>remove-cell<a class="headerlink" href="#remove-cell" title="Permalink to this headline">#</a></h3>
+<span id="sec-remove-cell"></span><h3>remove-cell<a class="headerlink" href="#remove-cell" title="Permalink to this headline">#</a></h3>
 <p>Remove the input as well as the output of the code cell.</p>
 <p>Source:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove-cell</span>
@@ -409,7 +409,7 @@ Useful to hide some warning during important without having filter the messages 
 </div>
 </section>
 <section id="raises-exception">
-<span id="id6"></span><h3>raises-exception<a class="headerlink" href="#raises-exception" title="Permalink to this headline">#</a></h3>
+<span id="sec-raises-exception"></span><h3>raises-exception<a class="headerlink" href="#raises-exception" title="Permalink to this headline">#</a></h3>
 <p>The following code raises an exception and has
 <code class="docutils literal notranslate"><span class="pre">raises-exception</span></code> set to signal that the exception  is expected and continues with the execution and build process of the documentation.
 This is helpful, if you are showing examples of <em>failing</em> code and want to include the trace-back.</p>
@@ -438,7 +438,7 @@ This is helpful, if you are showing examples of <em>failing</em> code and want t
 </div>
 </section>
 <section id="skip-execution">
-<span id="id7"></span><h3>skip-execution<a class="headerlink" href="#skip-execution" title="Permalink to this headline">#</a></h3>
+<span id="sec-skip-execution"></span><h3>skip-execution<a class="headerlink" href="#skip-execution" title="Permalink to this headline">#</a></h3>
 <p>The following code <em>would</em> raise an exception but the execution of the cell is skipped and not exception is raised.</p>
 <p>Source:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># skip-execution</span>
@@ -457,7 +457,7 @@ This is helpful, if you are showing examples of <em>failing</em> code and want t
 </section>
 </section>
 <section id="myst-nb-metadata-configuration">
-<span id="mystnb-conf"></span><h2>Myst-NB Metadata Configuration<a class="headerlink" href="#myst-nb-metadata-configuration" title="Permalink to this headline">#</a></h2>
+<span id="sec-mystnb-conf"></span><h2>Myst-NB Metadata Configuration<a class="headerlink" href="#myst-nb-metadata-configuration" title="Permalink to this headline">#</a></h2>
 <p>At the time of writing, the following configuration keyword-value pairs can be set in the <code class="docutils literal notranslate"><span class="pre">mystnb</span></code> metadata entry of a Jupyter code-cell:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#sec-remove-code-source"><span class="std std-ref">remove_code_source</span></a></p></li>
@@ -675,7 +675,7 @@ stdout 1
 <section id="error-lexer">
 <span id="sec-error-lexer"></span><h3>error_lexer<a class="headerlink" href="#error-lexer" title="Permalink to this headline">#</a></h3>
 <p>Pygments lexer applied to the error/traceback outputs.
-Note, that to be able to correctly build the documentation, the following example also uses <a class="reference internal" href="#raises-exception"><span class="std std-ref">raises-exception</span></a> to let the executor now that we <em>expect</em> an exception to be raised.</p>
+Note, that to be able to correctly build the documentation, the following example also uses <a class="reference internal" href="#sec-raises-exception"><span class="std std-ref">raises-exception</span></a> to let the executor now that we <em>expect</em> an exception to be raised.</p>
 <p>Source:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># error_lexer = python</span>
 <span class="c1"># raises-exception</span>
@@ -817,9 +817,9 @@ To see a list of all possible configuration values, take a look at the <a class=
 </div>
 </div>
 <div class="cell_output docutils container">
-<figure class="align-default" id="id8">
+<figure class="align-default" id="id2">
 <figcaption>
-<p><span class="caption-text">I am a top caption!</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">I am a top caption!</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 <img alt="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png" src="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png" />
 </figcaption>
 </figure>
