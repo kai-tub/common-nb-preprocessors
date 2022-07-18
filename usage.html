@@ -1,0 +1,942 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Preprocessors Reference" href="preprocessors.html" /><link rel="prev" title="Installation" href="install.html" />
+
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.06.21"/>
+        <title>MyST-NB Usage - Common NB Preprocessors documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="intro.html"><div class="brand">Common NB Preprocessors  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="intro.html">
+  
+  
+  <span class="sidebar-brand-text">Common NB Preprocessors  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">MyST-NB Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessors.html">Preprocessors Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility_reference.html">Utility Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general/dependencies.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general/code_of_conduct.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general/license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="myst-nb-usage">
+<span id="id1"></span><h1>MyST-NB Usage<a class="headerlink" href="#myst-nb-usage" title="Permalink to this headline">#</a></h1>
+<p>The (probably) most useful function of this library is the <code class="docutils literal notranslate"><span class="pre">myst_nb_metadata_injector</span></code>.
+This allows you to write <em>magic-comments</em> inside of your Jupyter code cells to inject metadata into those cells and configure the execution/rendering behavior of the  <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/index.html">MyST-NB</a> library.</p>
+<p>For example, with a simple comment like <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">remove-input</span></code> you can remove the code cell in your rendered documentation and only show the output without having to fight with setting the metadata tags of your code cell. See the following example:</p>
+<p>Source (what you would write inside of your Jupyter notebook)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove-input</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My code cell is removed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered output of MyST-NB:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My code cell is removed
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can (can’t ?) see the output of the cell was rendered but the code-cell itself is hidden on the generated page.</p>
+<p>The main motivation for this functionality is to keep the configuration <em>local</em> and not hide it behind an <code class="docutils literal notranslate"><span class="pre">metadata</span></code> window inside of the Jupyter Notebook UI.
+This is especially frustrating for users that use UIs that do not support configuring the code cell metadata, like VSCode.</p>
+<section id="enabling-the-metadata-injector-for-myst-nb">
+<h2>Enabling the Metadata Injector for MyST-NB<a class="headerlink" href="#enabling-the-metadata-injector-for-myst-nb" title="Permalink to this headline">#</a></h2>
+<p>To enable <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/index.html">MyST-NB</a> to use the metadata injection preprocessor by default, you have to add the following code to your <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/configuration.html">conf.py</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nb_custom_formats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;.ipynb&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;common_nb_preprocessors.myst_nb_metadata_injector&quot;</span><span class="p">,</span>
+        <span class="p">{</span><span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;=&quot;</span><span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The current version requires <em>you</em> to specify the <code class="docutils literal notranslate"><span class="pre">prefix</span></code> that indicates the start of a potential <em>magic comment</em>.
+Usually, this should be comment symbol(s) of the programming language.
+By default, and used in the example above, the <code class="docutils literal notranslate"><span class="pre">prefix=#</span></code> as this is the comment symbol for the Python programming language.
+The <code class="docutils literal notranslate"><span class="pre">delimiter</span></code> may be a character/string of your choice and will be used for separating key-value pairs.</p>
+<p>To see a list of all possible configuration, see the <a class="reference internal" href="utility_reference.html#common_nb_preprocessors.myst_nb.myst_nb_metadata_injector" title="common_nb_preprocessors.myst_nb.myst_nb_metadata_injector"><span class="xref myst py py-func">API documentation of mystnb_nb_metadata_injector</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>To overwrite the default <code class="docutils literal notranslate"><span class="pre">ipynb</span></code> extension parser, you are required to use <code class="docutils literal notranslate"><span class="pre">MyST-NB&gt;=0.14.0</span></code>!
+At the time of writing, the <a class="reference external" href="https://jupyterbook.org/en/stable/intro.html">jupyter-book project</a> (<code class="docutils literal notranslate"><span class="pre">v0.13</span></code>) fixes the <code class="docutils literal notranslate"><span class="pre">MyST-NB</span></code> version to <code class="docutils literal notranslate"><span class="pre">0.13.1</span></code> and <em>cannot</em> overwrite the default <code class="docutils literal notranslate"><span class="pre">ipynb</span></code> format.</p>
+<p>You can rename your notebooks with a different extension (only characters after the last <code class="docutils literal notranslate"><span class="pre">.</span></code> are considered the extension) and use that option for the custom parser instead.
+The main issue with that approach is that some tools have a hard time working with a different extension for Jupyter notebooks (like VSCode).</p>
+</div>
+</section>
+<section id="understanding-the-examples">
+<h2>Understanding the examples<a class="headerlink" href="#understanding-the-examples" title="Permalink to this headline">#</a></h2>
+<p>To show the <em>effects</em> of the different options, the article will be structured as follows:</p>
+<ol class="arabic simple">
+<li><p>The jupyter-notebook cell’s source code is shown. The visual indicator of the <em>source</em> code of the code cell, is that the stylized code-cell has <em>no</em> border around it.</p></li>
+<li><p>The jupyter-notebook cell’s source code is displayed <em>after</em> applying the preprocessor. This will remove the magic comment and inject the metadata into the cell’s code (not shown here). The processed code cell is stylized with a white border and a green left-border. This is the rendered code cell you would be seeing in your documentation.</p></li>
+<li><p>The output of the executed code-cell is shown with a white bordered cell.</p></li>
+</ol>
+<p>And one last visual example to clarify the different <em>stages</em>:</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># I am stage 1 and show the &#39;source&#39; code of</span>
+<span class="c1"># the code cell</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># magic-comment</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">I am stage 2 and show the post-processed code cell.</span>
+<span class="sd">If the magic comment matches one of the MyST-NB tags</span>
+<span class="sd">it would be removed from this cell and injected into the</span>
+<span class="sd">metadata field.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I am the rendered code cell output&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I am the rendered code cell output
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/index.html">MyST-NB</a> library provides two ways to configure the execution/rendering process of a code cell.
+One is to <em>add</em> specific strings to the <code class="docutils literal notranslate"><span class="pre">tags</span></code> metadata list.
+See <a class="reference internal" href="#tags-conf"><span class="std std-ref">Tag configuration</span></a> for details on what is possible with this configuration method.
+The other configuration method is to <em>set</em> key-value pairs inside of the <code class="docutils literal notranslate"><span class="pre">mystnb</span></code> metadata tag of the code-cell.
+See <a class="reference internal" href="#mystnb-conf"><span class="std std-ref">Myst-NB Metadata Configuration</span></a> for details.
+Note that the things you can configure are <em>mostly</em> different between both of these methods! You should take a look at <em>both</em>!</p>
+<p>If the last paragraph confused you, don’t worry.
+It is probably not that important for you as it discusses the <em>conceptual</em> difference between the two configuration options.
+The important thing to know is that the <code class="docutils literal notranslate"><span class="pre">tag</span></code> based configuration only allows you to <em>add</em> a string, while the other allows you to set a key-value pair.
+You will see how this effects the configuration in the following sections.</p>
+</section>
+<section id="tag-configuration">
+<span id="tags-conf"></span><h2>Tag configuration<a class="headerlink" href="#tag-configuration" title="Permalink to this headline">#</a></h2>
+<p>At the time of writing, the following configuration keywords can be set in the <code class="docutils literal notranslate"><span class="pre">tags</span></code> metadata entry of a Jupyter code-cell:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#remove-input"><span class="std std-ref">remove-input</span></a></p></li>
+<li><p><a class="reference internal" href="#remove-stderr"><span class="std std-ref">remove-stderr</span></a></p></li>
+<li><p><a class="reference internal" href="#remove-output"><span class="std std-ref">remove-output</span></a></p></li>
+<li><p><a class="reference internal" href="#remove-cell"><span class="std std-ref">remove-cell</span></a></p></li>
+<li><p><a class="reference internal" href="#skip-execution"><span class="std std-ref">skip-execution</span></a></p></li>
+<li><p><a class="reference internal" href="#raises-exception"><span class="std std-ref">raises-exception</span></a></p></li>
+</ul>
+<p>For more details, see the <code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">tags</span></code> section of the <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/configuration.html" title="(in MyST-NB)"><span class="xref std std-doc">MyST configuration documentation</span></a>.</p>
+<section id="no-match-example">
+<h3>no-match example<a class="headerlink" href="#no-match-example" title="Permalink to this headline">#</a></h3>
+<p>Example showing what happens with code cells that do <em>not</em> include magic comments/are <em>normal</em> code cells.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># unknown</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example showing what happens if the cell doesn&#39;t include a magic comment&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># unknown</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example showing what happens if the cell doesn&#39;t include a magic comment&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example showing what happens if the cell doesn&#39;t include a magic comment
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not so surprisingly, nothing much happens with those code-cells. They are simply executed and rendered as-is.</p>
+</section>
+<section id="remove-input">
+<span id="id2"></span><h3>remove-input<a class="headerlink" href="#remove-input" title="Permalink to this headline">#</a></h3>
+<p>Removes the source code of the cell.
+Useful if you are only interested in the output.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove-input</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My code cell is removed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My code cell is removed
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remove-stderr">
+<span id="id3"></span><h3>remove-stderr<a class="headerlink" href="#remove-stderr" title="Permalink to this headline">#</a></h3>
+<p>Only remove the standard error output of the code cell.
+This is useful if an underlying library uses <code class="docutils literal notranslate"><span class="pre">stderr</span></code> to print progress or other debug messages that would only pollute the output for the documentation.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove-stderr</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The stderr output is removed&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;But not the default output&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell tag_remove-stderr docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The stderr output is removed&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;But not the default output&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>But not the default output
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remove-output">
+<span id="id4"></span><h3>remove-output<a class="headerlink" href="#remove-output" title="Permalink to this headline">#</a></h3>
+<p>Remove the output of the code cell (duh).
+Useful to hide some warning during important without having filter the messages or to hide visual output.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove-output</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My output is removed&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;including the error output&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My output is removed&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;including the error output&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remove-cell">
+<span id="id5"></span><h3>remove-cell<a class="headerlink" href="#remove-cell" title="Permalink to this headline">#</a></h3>
+<p>Remove the input as well as the output of the code cell.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove-cell</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This entire cell is removed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<p>As you can (can’t ?) see the cell is missing from the documentation page.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The code-cell is still executed under the hood!</p>
+</div>
+</section>
+<section id="raises-exception">
+<span id="id6"></span><h3>raises-exception<a class="headerlink" href="#raises-exception" title="Permalink to this headline">#</a></h3>
+<p>The following code raises an exception and has
+<code class="docutils literal notranslate"><span class="pre">raises-exception</span></code> set to signal that the exception  is expected and continues with the execution and build process of the documentation.
+This is helpful, if you are showing examples of <em>failing</em> code and want to include the trace-back.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># raises-exception</span>
+<span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [8],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+
+<span class="ne">ZeroDivisionError</span>: division by zero
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="skip-execution">
+<span id="id7"></span><h3>skip-execution<a class="headerlink" href="#skip-execution" title="Permalink to this headline">#</a></h3>
+<p>The following code <em>would</em> raise an exception but the execution of the cell is skipped and not exception is raised.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># skip-execution</span>
+<span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how no output is produced and no exception is raised.</p>
+</section>
+</section>
+<section id="myst-nb-metadata-configuration">
+<span id="mystnb-conf"></span><h2>Myst-NB Metadata Configuration<a class="headerlink" href="#myst-nb-metadata-configuration" title="Permalink to this headline">#</a></h2>
+<p>At the time of writing, the following configuration keyword-value pairs can be set in the <code class="docutils literal notranslate"><span class="pre">mystnb</span></code> metadata entry of a Jupyter code-cell:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#sec-remove-code-source"><span class="std std-ref">remove_code_source</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-remove-code-outputs"><span class="std std-ref">remove_code_outputs</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-number-source-lines"><span class="std std-ref">number_source_lines</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-output-stderr"><span class="std std-ref">output_stderr</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-merge-streams"><span class="std std-ref">merge_streams</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-text-lexer"><span class="std std-ref">text_lexer</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-error-lexer"><span class="std std-ref">error_lexer</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-markdown-format"><span class="std std-ref">markdown_format</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-image"><span class="std std-ref">image</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-figure"><span class="std std-ref">figure</span></a></p></li>
+</ul>
+<p>In contrast to the <code class="docutils literal notranslate"><span class="pre">tag</span></code>-based configuration, the <code class="docutils literal notranslate"><span class="pre">mystnb</span></code>-based configuration uses a key-value pair!
+The <code class="docutils literal notranslate"><span class="pre">delimiter</span></code> is used to separate the key-value pairs.
+Note that spaces around the <code class="docutils literal notranslate"><span class="pre">delimiter</span></code> are allowed/ignored during the parsing process.
+The value is <strong>parsed as a <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">yaml</a>-string</strong>!
+This allows you to even set nested structures in a single line and is required for coercing the data to the correct type.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The value of the key-value pair is parsed as a <em>yaml</em>-string to allow correctly coercing the data to the desired type and to allow nested structures within a line.</p>
+<p>This library <em>only</em> allows setting the value on the same line. This means that you <em>cannot</em> write the value across multiple lines!</p>
+</div>
+<section id="remove-code-source">
+<span id="sec-remove-code-source"></span><h3>remove_code_source<a class="headerlink" href="#remove-code-source" title="Permalink to this headline">#</a></h3>
+<p>Removes the code cell… (Surprising, right?)</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove_code_source = true</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My code cell is removed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My code cell is removed
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remove-code-outputs">
+<span id="sec-remove-code-outputs"></span><h3>remove_code_outputs<a class="headerlink" href="#remove-code-outputs" title="Permalink to this headline">#</a></h3>
+<p>Removes the output of the cell, including the output to standard error.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove_code_outputs = true</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My output is removed&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;including the error output&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My output is removed&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;including the error output&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="number-source-lines">
+<span id="sec-number-source-lines"></span><h3>number_source_lines<a class="headerlink" href="#number-source-lines" title="Permalink to this headline">#</a></h3>
+<p>Add source line numbering to the current cell.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># number_source_lines = true</span>
+<span class="c1"># line 1</span>
+<span class="c1"># line 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I love my husky.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># line 1</span>
+<span class="linenos">2</span><span class="c1"># line 2</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I love my husky.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I love my husky.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="output-stderr">
+<span id="sec-output-stderr"></span><h3>output_stderr<a class="headerlink" href="#output-stderr" title="Permalink to this headline">#</a></h3>
+<p>Define the behavior for standard error output.
+Can be set to one of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">show</span></code>: (Default) Show the stderr as a separate output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove</span></code>: Hide stderr</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove-warn</span></code>: Hide stderr but log a warning to Sphinx</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">warn|error|severe</span></code>: Log the error with a specific logging level to Sphinx</p></li>
+</ul>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># output_stderr = show</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 0&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stderr&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 0&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stderr&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stdout 0
+stdout 1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stderr
+</pre></div>
+</div>
+</div>
+</div>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># output_stderr = remove</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 0&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stderr&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 0&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stderr&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stdout 0
+stdout 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the other options, see the official <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/render/format_code_cells.html#remove-stdout-or-stderr">MyST-NB documentation for the stderr configuration</a>.</p>
+</section>
+<section id="merge-streams">
+<span id="sec-merge-streams"></span><h3>merge_streams<a class="headerlink" href="#merge-streams" title="Permalink to this headline">#</a></h3>
+<p>Merge standard output and standard error into a single output cell.</p>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>This doesn’t work!</p>
+<p>I will have to investigate why this isn’t working.
+It seems like it also doesn’t work by manually setting the tag.</p>
+</div>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># merge_streams = true</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 0&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stderr&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 0&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stderr&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stdout 0
+stdout 1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stderr
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="text-lexer">
+<span id="sec-text-lexer"></span><h3>text_lexer<a class="headerlink" href="#text-lexer" title="Permalink to this headline">#</a></h3>
+<p>Pygments lexer applied to standard out, standard error and text/plain outputs.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># text_lexer = python</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Render output with Python code cell lexer&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Render output with Python code cell lexer&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Render output with Python code cell lexer</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="error-lexer">
+<span id="sec-error-lexer"></span><h3>error_lexer<a class="headerlink" href="#error-lexer" title="Permalink to this headline">#</a></h3>
+<p>Pygments lexer applied to the error/traceback outputs.
+Note, that to be able to correctly build the documentation, the following example also uses <a class="reference internal" href="#raises-exception"><span class="std std-ref">raises-exception</span></a> to let the executor now that we <em>expect</em> an exception to be raised.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># error_lexer = python</span>
+<span class="c1"># raises-exception</span>
+<span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;# The last line be lexed as a Python comment, everything else will be broken&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+    <span class="s2">&quot;# The last line be lexed as a Python comment, everything else will be broken&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">Exception</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">cell</span> <span class="n">line</span><span class="p">:</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+      <span class="mi">2</span>     <span class="s2">&quot;# The last line be lexed as a Python comment, everything else will be broken&quot;</span>
+      <span class="mi">3</span> <span class="p">)</span>
+
+<span class="ne">Exception</span><span class="p">:</span> <span class="c1"># The last line be lexed as a Python comment, everything else will be broken</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="markdown-format">
+<span id="sec-markdown-format"></span><h3>markdown_format<a class="headerlink" href="#markdown-format" title="Permalink to this headline">#</a></h3>
+<p>The format to use for text/markdown rendering.</p>
+<p>Can be one of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">commonmark</span></code> (Default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfm</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">myst</span></code></p></li>
+</ul>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># markdown_format = myst</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span>
+
+<span class="n">Markdown</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Term 1</span>
+<span class="s2">: Requires `deflist` extension to be loaded</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Rendered:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span>
+
+<span class="n">Markdown</span><span class="p">(</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Term 1</span>
+<span class="sd">: Requires myst and `deflist` extension to be loaded</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<dl class="simple myst">
+<dt>Term 1</dt><dd><p>Requires myst and <code class="docutils literal notranslate"><span class="pre">deflist</span></code> extension to be loaded</p>
+</dd>
+</dl>
+</div>
+</div>
+<p>In contrast to the default with</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># markdown_format = commonmark</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span>
+
+<span class="n">Markdown</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Term 1</span>
+<span class="s2">: Won&#39;t render as `deflist` with commonmark</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span>
+
+<span class="n">Markdown</span><span class="p">(</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Term 1</span>
+<span class="sd">: Won&#39;t render as `deflist` with commonmark</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p>Term 1
+: Won’t render as <code class="docutils literal notranslate"><span class="pre">deflist</span></code> with commonmark</p>
+</div>
+</div>
+</section>
+<section id="image">
+<span id="sec-image"></span><h3>image<a class="headerlink" href="#image" title="Permalink to this headline">#</a></h3>
+<p>Options for image outputs.</p>
+<p>To see a list of all possible configuration values, take a look at the <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/render/format_code_cells.html#images-and-figures">official image documentation</a>.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># image = {&quot;width&quot;: 20%, &quot;align&quot;: &quot;right&quot;, &quot;alt&quot;: &quot;A cute comic-style fish with a party hat&quot;}</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;fish.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;fish.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png"><img alt="A cute comic-style fish with a party hat" class="align-right" src="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png" style="width: 20%;" /></a>
+</div>
+</div>
+</section>
+<section id="figure">
+<span id="sec-figure"></span><h3>figure<a class="headerlink" href="#figure" title="Permalink to this headline">#</a></h3>
+<p>Options for figure outputs.
+To see a list of all possible configuration values, take a look at the <a class="reference external" href="https://myst-nb.readthedocs.io/en/latest/render/format_code_cells.html#images-and-figures">official figure documentation</a>.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># figure = {&quot;caption&quot;: &quot;I am a top caption!&quot;, &quot;caption_before&quot;: true}</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;fish.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;fish.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="id8">
+<figcaption>
+<p><span class="caption-text">I am a top caption!</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+<img alt="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png" src="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png" />
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="preprocessors.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Preprocessors Reference</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="install.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Installation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Kai Norman Clasen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/kai-tub/common-nb-preprocessors/" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">MyST-NB Usage</a><ul>
+<li><a class="reference internal" href="#enabling-the-metadata-injector-for-myst-nb">Enabling the Metadata Injector for MyST-NB</a></li>
+<li><a class="reference internal" href="#understanding-the-examples">Understanding the examples</a></li>
+<li><a class="reference internal" href="#tag-configuration">Tag configuration</a><ul>
+<li><a class="reference internal" href="#no-match-example">no-match example</a></li>
+<li><a class="reference internal" href="#remove-input">remove-input</a></li>
+<li><a class="reference internal" href="#remove-stderr">remove-stderr</a></li>
+<li><a class="reference internal" href="#remove-output">remove-output</a></li>
+<li><a class="reference internal" href="#remove-cell">remove-cell</a></li>
+<li><a class="reference internal" href="#raises-exception">raises-exception</a></li>
+<li><a class="reference internal" href="#skip-execution">skip-execution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#myst-nb-metadata-configuration">Myst-NB Metadata Configuration</a><ul>
+<li><a class="reference internal" href="#remove-code-source">remove_code_source</a></li>
+<li><a class="reference internal" href="#remove-code-outputs">remove_code_outputs</a></li>
+<li><a class="reference internal" href="#number-source-lines">number_source_lines</a></li>
+<li><a class="reference internal" href="#output-stderr">output_stderr</a></li>
+<li><a class="reference internal" href="#merge-streams">merge_streams</a></li>
+<li><a class="reference internal" href="#text-lexer">text_lexer</a></li>
+<li><a class="reference internal" href="#error-lexer">error_lexer</a></li>
+<li><a class="reference internal" href="#markdown-format">markdown_format</a></li>
+<li><a class="reference internal" href="#image">image</a></li>
+<li><a class="reference internal" href="#figure">figure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    </body>
+</html>
