@@ -51,6 +51,7 @@ test = [
     "pre-commit",
     "jupyter",
     "notebook",
+    "coverage>=6.4.2",
 ]
 lint = [
     "black",
@@ -95,3 +96,6 @@ serve-sphinx-docs.help = "Serve the Sphinx documentation with sphinx-autobuild"
 
 tests.cmd = "pytest tests/"
 tests.help = "Call test-runner"
+
+coverage.cmd = "coverage run -m pytest tests/"
+coverage.help = "Run the coverage with pytest"
