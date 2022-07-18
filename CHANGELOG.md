@@ -1,3 +1,15 @@
+# v0.1.1 (Mon Jul 18 2022)
+
+#### 🐛 Bug Fix
+
+- Fix email in pyproject.toml [#2](https://github.com/kai-tub/common-nb-preprocessors/pull/2) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v0.1.0 (Mon Jul 18 2022)
 
 :tada: This release contains work from a new contributor! :tada:
