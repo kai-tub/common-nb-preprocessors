@@ -8,8 +8,6 @@ from .metadata_injector import (
 )
 
 __all__ = [
-    # "JUPYTER_BOOK_CODE_TAGS",
-    # "MYST_NB_CELL_CONF",
     "MystNBCellTags",
     "MystNBCellConf",
     "myst_nb_metadata_injector",

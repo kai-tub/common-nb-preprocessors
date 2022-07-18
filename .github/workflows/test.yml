@@ -25,6 +25,9 @@ jobs:
         uses: pdm-project/setup-pdm@main
         with:
           python-version: 3.8
+      - name: Install dependencies
+        run: |
+          pdm sync --dev
       - name: Check precommit
         run: |
           pdm run pre-commit run --all-files
