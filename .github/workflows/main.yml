@@ -26,6 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           pdm sync --dev --group docs
+          pdm plugin add pdm-bump
           pdm run build-docs
       # Must be run BEFORE GitHub Pages Deploy
       # as the GitHub Pages action would check out a different
