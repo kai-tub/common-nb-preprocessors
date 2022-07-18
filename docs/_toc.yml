@@ -1,5 +1,6 @@
 root: intro
 entries:
+  - file: install
   - file: usage
   - file: preprocessors
   - file: utility_reference
