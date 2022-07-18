@@ -2,7 +2,7 @@
 > A collection of common notebook preprocessors and some useful wrappers.
 
 [![Tests](https://img.shields.io/github/workflow/status/kai-tub/common-nb-preprocessors/CI?color=dark-green&label=%20Tests)](https://github.com/kai-tub/common-nb-preprocessors//actions/workflows/main.yml)
-[![MyPy Type Checker](https://img.shields.io/badge/%20type_checker-mypy-%231674b1?style=flat&color=dark-green)](http://mypy-lang.org/)
+<!-- [![MyPy Type Checker](https://img.shields.io/badge/%20type_checker-mypy-%231674b1?style=flat&color=dark-green)](http://mypy-lang.org/) -->
 [![License](https://img.shields.io/pypi/l/common-nb-preprocessors?color=dark-green)](https://github.com/kai-tub/common-nb-preprocessors//blob/main/LICENSE)
 [![Python Versions](https://img.shields.io/pypi/pyversions/common-nb-preprocessors)](https://pypi.org/project/common-nb-preprocessors)
 [![PyPI version](https://img.shields.io/pypi/v/common-nb-preprocessors)](https://pypi.org/project/common-nb-preprocessors) <!-- [![Conda Version](https://img.shields.io/conda/vn/conda-forge/common-nb-preprocessors?color=dark-green)](https://anaconda.org/conda-forge/common-nb-preprocessors) -->

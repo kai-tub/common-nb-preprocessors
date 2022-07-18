@@ -28,9 +28,9 @@ jobs:
       - name: Check precommit
         run: |
           pdm run pre-commit run --all-files
-      - name: Test mypy
-        run: |
-          pdm run mypy common_nb_preprocessors
+      # - name: Test mypy
+      #   run: |
+      #     pdm run mypy common_nb_preprocessors
       - name: Run tests from within PDM
         run: |
           pdm run tests
