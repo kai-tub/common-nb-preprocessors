@@ -32,7 +32,7 @@ extensions = [
     "sphinx_external_toc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.autodoc",
-    "sphinx_design",
+    # "sphinx_design",
     # "sphinx.ext.doctest",
     # Other popular choices:
     # "myst_parser",
