@@ -214,6 +214,18 @@
 <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.prefix" title="common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.prefix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefix</span></code></a> to the <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.metadata_group" title="common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.metadata_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metadata_group</span></code></a> list.
 These <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.strings" title="common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.strings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strings</span></code></a> must be on their own line and only contain the <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.prefix" title="common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.prefix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefix</span></code></a>,
 a <code class="xref py py-obj docutils literal notranslate"><span class="pre">string</span></code> from <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.strings" title="common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.strings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strings</span></code></a> (i.e., the magic comment) and whitespace characters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Public constructor</p>
+<dl class="simple">
+<dt>config<span class="classifier">Config</span></dt><dd><p>Configuration file structure</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">**kw</span></code></dt><dd><p>Additional keyword arguments passed to parent</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.metadata_group">
 <span class="sig-name descname"><span class="pre">metadata_group</span></span><a class="headerlink" href="#common_nb_preprocessors.metadata_injector.MetaDataListInjectorPreprocessor.metadata_group" title="Permalink to this definition">#</a></dt>
@@ -270,7 +282,7 @@ injected into the selected metadata group.</p>
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #008000; text-decoration-color: #008000">'metadata'</span>: <span style="font-weight: bold">{}</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #008000; text-decoration-color: #008000">'cells'</span>: <span style="font-weight: bold">[</span>
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   </span><span style="font-weight: bold">{</span>
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'26b3d174'</span>,
+<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'2ef7b502'</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'cell_type'</span>: <span style="color: #008000; text-decoration-color: #008000">'code'</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'metadata'</span>: <span style="font-weight: bold">{}</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'execution_count'</span>: <span style="color: #800080; text-decoration-color: #800080; font-style: italic">None</span>,
@@ -303,7 +315,7 @@ injected into the selected metadata group.</p>
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #008000; text-decoration-color: #008000">'metadata'</span>: <span style="font-weight: bold">{}</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #008000; text-decoration-color: #008000">'cells'</span>: <span style="font-weight: bold">[</span>
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   </span><span style="font-weight: bold">{</span>
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'26b3d174'</span>,
+<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'2ef7b502'</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'cell_type'</span>: <span style="color: #008000; text-decoration-color: #008000">'code'</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'metadata'</span>: <span style="font-weight: bold">{</span>
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'tags'</span>: <span style="font-weight: bold">[</span>
@@ -329,6 +341,18 @@ injected into the selected metadata group.</p>
 <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.prefix" title="common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.prefix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prefix</span></code></a> to the <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.metadata_group" title="common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.metadata_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metadata_group</span></code></a> dictionary.
 The key-value pairs are generated by searching for each <code class="xref py py-obj docutils literal notranslate"><span class="pre">key</span></code> of <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.keys" title="common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keys</span></code></a> followed
 by <a class="reference internal" href="#common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.delimiter" title="common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.delimiter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delimiter</span></code></a> and the value.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Public constructor</p>
+<dl class="simple">
+<dt>config<span class="classifier">Config</span></dt><dd><p>Configuration file structure</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">**kw</span></code></dt><dd><p>Additional keyword arguments passed to parent</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.delimiter">
 <span class="sig-name descname"><span class="pre">delimiter</span></span><a class="headerlink" href="#common_nb_preprocessors.metadata_injector.MetaDataMapInjectorPreprocessor.delimiter" title="Permalink to this definition">#</a></dt>
@@ -391,7 +415,7 @@ by <a class="reference internal" href="#common_nb_preprocessors.metadata_injecto
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #008000; text-decoration-color: #008000">'metadata'</span>: <span style="font-weight: bold">{}</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #008000; text-decoration-color: #008000">'cells'</span>: <span style="font-weight: bold">[</span>
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   </span><span style="font-weight: bold">{</span>
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'c8628ae3'</span>,
+<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'cf1defd0'</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'cell_type'</span>: <span style="color: #008000; text-decoration-color: #008000">'code'</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'metadata'</span>: <span style="font-weight: bold">{}</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'execution_count'</span>: <span style="color: #800080; text-decoration-color: #800080; font-style: italic">None</span>,
@@ -425,7 +449,7 @@ by <a class="reference internal" href="#common_nb_preprocessors.metadata_injecto
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #008000; text-decoration-color: #008000">'metadata'</span>: <span style="font-weight: bold">{}</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   </span><span style="color: #008000; text-decoration-color: #008000">'cells'</span>: <span style="font-weight: bold">[</span>
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   </span><span style="font-weight: bold">{</span>
-<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'c8628ae3'</span>,
+<span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'id'</span>: <span style="color: #008000; text-decoration-color: #008000">'cf1defd0'</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'cell_type'</span>: <span style="color: #008000; text-decoration-color: #008000">'code'</span>,
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'metadata'</span>: <span style="font-weight: bold">{</span>
 <span style="color: #7fbf7f; text-decoration-color: #7fbf7f">│   │   │   │   </span><span style="color: #008000; text-decoration-color: #008000">'mystnb'</span>: <span style="font-weight: bold">{</span>
