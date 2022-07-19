@@ -27,7 +27,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          pdm install --dev
+          pdm install --dev --group :all
       - name: Check precommit
         run: |
           pdm run pre-commit run --all-files
