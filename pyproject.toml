@@ -80,7 +80,8 @@ profile = "black"
 [tool.pdm.scripts]
 black = "black ."
 isort = "isort ."
-coverage = "coverage run -m pytest tests/"
+tests = "coverage run -m pytest tests/"
+coverage_report = "coverage report"
 coverage_html_report = "coverage html"
 
 mypy = "mypy ."
@@ -96,11 +97,8 @@ build-docs.help = "Build Sphinx documentation"
 serve-sphinx-docs.cmd = "sphinx-autobuild docs docs/_build --open-browser"
 serve-sphinx-docs.help = "Serve the Sphinx documentation with sphinx-autobuild"
 
-tests.cmd = "pytest tests/"
-tests.help = "Call test-runner"
-
 coverage_html.composite = [
-    "coverage",
+    "tests",
     "coverage_html_report"
 ]
 coverage_html.help = "Run the coverage with pytest and produce the html"

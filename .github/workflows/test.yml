@@ -34,6 +34,10 @@ jobs:
       # - name: Test mypy
       #   run: |
       #     pdm run mypy common_nb_preprocessors
-      - name: Run tests from within PDM
+      - name: Run tests from within PDM with coverage
         run: |
           pdm run tests
+      - name: Code coverage-reporter
+        uses: tj-actions/coverage-reporter@v5.1
+        with:
+          coverage-command: "pdm run coverage_report"
