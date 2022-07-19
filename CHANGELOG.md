@@ -1,3 +1,15 @@
+# v0.1.3 (Tue Jul 19 2022)
+
+#### 🐛 Bug Fix
+
+- Doc & test update [#4](https://github.com/kai-tub/common-nb-preprocessors/pull/4) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v0.1.2 (Mon Jul 18 2022)
 
 #### 🐛 Bug Fix
