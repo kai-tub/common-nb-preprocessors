@@ -33,14 +33,18 @@ class MetaDataListInjectorPreprocessor(Preprocessor):
     remove_line = Bool(default_value=True).tag(config=True)
     """By default remove the matching line in the code-cell."""
 
-    @validate("metadata_group")
-    def _valid_metadata_group(self, proposal):
-        if proposal["value"] == "":
-            raise TraitError("metadata_group must be non-empty string!")
-        return proposal["value"]
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.metadata_group == "":
+            raise ValueError("metadata_group myst be non-empty string!")
 
     def _write_tag(self, tag, cell):
         tags = cell.setdefault("metadata", {}).setdefault(self.metadata_group, [])
+        if not isinstance(tags, list):
+            raise RuntimeError(
+                f"Trying to to set metadata list but entry {self.metadata_group} is of type: {type(tags)}",
+                self.metadata_group,
+            )
         if tag not in tags:
             tags.append(tag)
         cell["metadata"][self.metadata_group] = tags
@@ -82,17 +86,16 @@ class MetaDataMapInjectorPreprocessor(Preprocessor):
     value_to_yaml = Bool(default_value=False).tag(config=True)
     """Parse the value as yaml syntax before writing it as a dictionary. Default is `False`."""
 
-    @validate("metadata_group")
-    def _valid_metadata_group(self, proposal):
-        if proposal["value"] == "":
-            raise TraitError("metadata_group must be non-empty string!")
-        return proposal["value"]
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if self.metadata_group == "":
+            raise ValueError("metadata_group myst be non-empty string!")
 
     def _write_entry(self, key, value, cell):
         entries = cell.setdefault("metadata", {}).setdefault(self.metadata_group, {})
-        if isinstance(entries, list):
-            raise TraitError(
-                "Trying to overwrite metadata list type with metadata dictionary.",
+        if not isinstance(entries, dict):
+            raise RuntimeError(
+                f"Trying to to set metadata dictionary but entry {self.metadata_group} is of type: {type(entries)}",
                 self.metadata_group,
             )
         if self.value_to_yaml:

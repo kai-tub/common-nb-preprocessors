@@ -1,7 +1,9 @@
-from unittest.mock import patch
+import sys
 
 import pytest
+from pytest import MonkeyPatch
 
+import common_nb_preprocessors._constant_builder
 from common_nb_preprocessors.myst_nb import MystNBCellConf, MystNBCellTags
 
 
@@ -34,6 +36,26 @@ def test_unsynced_mystnb_cell_conf_constant(monkeypatch):
         MystNBCellConf._validate()
 
 
-# TODO: Check if import error is raised
-# TODO: Use pdm to only install local deps and check
-# that the correct packages are installed!
+@pytest.mark.parametrize("without_lib", ["pandas", "bs4", "html5lib"])
+def test_import_error(without_lib: str, monkeypatch: MonkeyPatch):
+    monkeypatch.setitem(sys.modules, without_lib, None)
+
+    # reload as otherwise monkey-patching was not sufficient
+    # when running all tests
+    import importlib
+
+    with pytest.raises(ImportError, match="requires"):
+        importlib.reload(common_nb_preprocessors._constant_builder)
+
+
+def test_multiple_matching_tables(monkeypatch: MonkeyPatch):
+    def return_two_elem_list(*args, **kwargs):
+        return [1, 2]
+
+    import pandas
+
+    monkeypatch.setattr(pandas, "read_html", return_two_elem_list)
+    with pytest.raises(ValueError, match="unique table"):
+        common_nb_preprocessors._constant_builder._read_unique_myst_nb_table(
+            "IamNotOnTheMySTPageAndWillNotFindAMatch"
+        )

@@ -1,8 +1,13 @@
 try:
+    import bs4
+    import html5lib
     import pandas
 except ImportError:
     raise ImportError(
-        "This module is only used during development and requires pandas."
+        """\
+        This module is only used during development and requires
+        pandas + the `read_html` dependencies (bs4 and html5lib).
+        """
     )
 
 
@@ -19,11 +24,11 @@ def _read_unique_myst_nb_table(match: str) -> pandas.DataFrame:
     )
 
 
-def _read_unique_jupyter_book_table(match: str) -> pandas.DataFrame:
-    return _read_unique_pd_table(
-        url="https://jupyterbook.org/en/latest/reference/cheatsheet.html#myst-cheatsheet-code-cell-tags",
-        match=match,
-    )
+# def _read_unique_jupyter_book_table(match: str) -> pandas.DataFrame:
+#     return _read_unique_pd_table(
+#         url="https://jupyterbook.org/en/latest/reference/cheatsheet.html#myst-cheatsheet-code-cell-tags",
+#         match=match,
+#     )
 
 
 # def jupyter_book_cell_tags() -> List[str]:

@@ -1,9 +1,7 @@
 from typing import Dict
 
-import hypothesis.strategies as st
 import nbformat
 import pytest
-from hypothesis import assume, given
 from traitlets import TraitError
 
 from common_nb_preprocessors.metadata_injector import (
@@ -50,18 +48,10 @@ def test_metadata_list_injector_remove_line(
     assert nb.cells[0]["metadata"]["tags"][0] == "hide"
 
 
-@pytest.mark.parametrize(
-    "inp_kwargs",
-    [
-        {"metadata_group": ""},
-        {"strings": []},
-    ],
-)
-def test_metadata_injector_empty_inp(inp_kwargs: Dict):
+def test_metadata_list_injector_empty_metadata_group():
     nb = nbformat.v4.new_notebook()
-    inp_kwargs.setdefault("strings", ["a"])
-    with pytest.raises(TraitError):
-        nb, _ = MetaDataListInjectorPreprocessor(**inp_kwargs).preprocess(nb, None)
+    with pytest.raises(ValueError, match="non-empty"):
+        MetaDataListInjectorPreprocessor(strings=["a"], metadata_group="")
 
 
 @pytest.mark.parametrize(
@@ -116,3 +106,68 @@ def test_metadata_map_injector_delimiter(delimiter, cell_comment):
     injected_map = nb.cells[-1]["metadata"]["mystnb"]
     assert list(injected_map.keys()) == keys
     assert injected_map[keys[0]] == "true"
+
+
+def test_metadata_map_injector_empty_metadata_group():
+    nb = nbformat.v4.new_notebook()
+    with pytest.raises(ValueError, match="non-empty"):
+        nb, _ = MetaDataMapInjectorPreprocessor(
+            keys=["a"], metadata_group=""
+        ).preprocess(nb, None)
+
+
+def test_metadata_list_markdown():
+    nb = nbformat.v4.new_notebook()
+    source = "# a"
+    nb.cells.append(
+        nbformat.v4.new_markdown_cell(source),
+    )
+    nb.cells.append(
+        nbformat.v4.new_code_cell(source),
+    )
+    nb, _ = MetaDataListInjectorPreprocessor(strings=["a"], prefix="#").preprocess(
+        nb, None
+    )
+    assert nb.cells[0].source == source
+    assert nb.cells[1].source == ""
+
+
+def test_metadata_map_markdown():
+    nb = nbformat.v4.new_notebook()
+    source = "# a = true"
+    nb.cells.append(
+        nbformat.v4.new_markdown_cell(source),
+    )
+    nb.cells.append(
+        nbformat.v4.new_code_cell(source),
+    )
+    nb, _ = MetaDataMapInjectorPreprocessor(
+        keys=["a"],
+        prefix="#",
+        delimiter="=",
+        metadata_group="mystnb",
+    ).preprocess(nb, None)
+    assert nb.cells[0].source == source
+    assert nb.cells[1].source == ""
+
+
+def test_metadata_list_type_clash():
+    nb = nbformat.v4.new_notebook()
+    nb.cells.append(
+        nbformat.v4.new_code_cell("# a", metadata={"other": "single-value"})
+    )
+    with pytest.raises(RuntimeError, match="type"):
+        nb, _ = MetaDataListInjectorPreprocessor(
+            strings=["a"], metadata_group="other"
+        ).preprocess(nb, None)
+
+
+def test_metadata_map_type_clash():
+    nb = nbformat.v4.new_notebook()
+    nb.cells.append(
+        nbformat.v4.new_code_cell("# a=false", metadata={"mystnb": "single-value"})
+    )
+    with pytest.raises(RuntimeError, match="type"):
+        nb, _ = MetaDataMapInjectorPreprocessor(
+            keys=["a"], metadata_group="mystnb"
+        ).preprocess(nb, None)

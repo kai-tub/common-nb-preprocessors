@@ -50,7 +50,7 @@ class MystNBCellTags(str, Enum):
     See :ref:`sec/skip-execution` for a visual example.
     """
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value
 
     @classmethod
@@ -166,7 +166,7 @@ class MystNBCellConf(str, Enum):
     See :ref:`sec/figure` for a visual example.
     """
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value
 
     @classmethod
@@ -215,7 +215,7 @@ class MystNBCellConf(str, Enum):
 
 def myst_nb_metadata_injector(
     file_content: str, prefix: str = "#", remove_line: bool = True, delimiter="="
-):
+) -> nbformat.NotebookNode:
     """
     The preprocessor will inject all the MyST-NB specific tags into the
     metadata `tags` and the cell level configuration to the `mystnb` field.
