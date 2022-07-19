@@ -80,7 +80,7 @@ profile = "black"
 [tool.pdm.scripts]
 black = "black ."
 isort = "isort ."
-tests = "coverage run --omit 'venv/*' --omit '__pypackages__/**/*' --omit 'tests/*' -m pytest tests/"
+tests = "coverage run --source common_nb_preprocessors  --omit 'venv/*,__pypackages__/*,tests/*' -m pytest tests/"
 coverage_report = "coverage report"
 coverage_html_report = "coverage html"
 
