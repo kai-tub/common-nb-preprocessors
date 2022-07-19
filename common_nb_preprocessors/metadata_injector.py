@@ -1,6 +1,9 @@
+from typing import Dict, List, Tuple, Union
+
+import traitlets
 import yaml
 from nbconvert.preprocessors import Preprocessor
-from traitlets import Bool, List, TraitError, Unicode, validate
+from nbformat import NotebookNode
 
 from ._patterns import (
     build_prefixed_regex_pattern,
@@ -21,24 +24,24 @@ class MetaDataListInjectorPreprocessor(Preprocessor):
     a `string` from `strings` (i.e., the magic comment) and whitespace characters.
     """
 
-    metadata_group = Unicode(default_value="tags").tag(config=True)
+    metadata_group: str = traitlets.Unicode(default_value="tags").tag(config=True)
     """Metadata group to which the matched magic comment will be appended to if
     it doesn't already exist. Default is `tags`."""
-    strings = List(Unicode(), minlen=1).tag(config=True)
+    strings: List[str] = traitlets.List(traitlets.Unicode(), minlen=1).tag(config=True)
     """List of strings (magic comments) that define the text that will be matched and
     injected into the selected metadata group."""
-    prefix = Unicode(default_value="#").tag(config=True)
+    prefix: str = traitlets.Unicode(default_value="#").tag(config=True)
     """The prefix that indicates the possible start of a magic comment line.
     Should be comment character of the language. By default `#`."""
-    remove_line = Bool(default_value=True).tag(config=True)
+    remove_line: bool = traitlets.Bool(default_value=True).tag(config=True)
     """By default remove the matching line in the code-cell."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         if self.metadata_group == "":
             raise ValueError("metadata_group myst be non-empty string!")
 
-    def _write_tag(self, tag, cell):
+    def _write_tag(self, tag: str, cell: NotebookNode) -> NotebookNode:
         tags = cell.setdefault("metadata", {}).setdefault(self.metadata_group, [])
         if not isinstance(tags, list):
             raise RuntimeError(
@@ -50,7 +53,9 @@ class MetaDataListInjectorPreprocessor(Preprocessor):
         cell["metadata"][self.metadata_group] = tags
         return cell
 
-    def preprocess_cell(self, cell, resource, index):
+    def preprocess_cell(
+        self, cell: NotebookNode, resource: Union[Dict, None], _index: int
+    ) -> Tuple[NotebookNode, Union[Dict, None]]:
         """Inject metadata to code-cell if match is found"""
         if cell["cell_type"] == "markdown":
             return cell, resource
@@ -73,25 +78,25 @@ class MetaDataMapInjectorPreprocessor(Preprocessor):
     by `delimiter` and the value.
     """
 
-    metadata_group = Unicode().tag(config=True)
+    metadata_group: str = traitlets.Unicode().tag(config=True)
     """Metadata group into which the matched key-value pairs will be written."""
-    keys = List(Unicode()).tag(config=True)
+    keys: List[str] = traitlets.List(traitlets.Unicode()).tag(config=True)
     """List of keys that will be used as a key for the `metadata_group` dictionary entry and is followed by the `delimiter` and `value`."""
-    prefix = Unicode(default_value="#").tag(config=True)
+    prefix: str = traitlets.Unicode(default_value="#").tag(config=True)
     """The prefix that indicates the possible start of a magic comment line. Should be comment character of the language."""
-    remove_line = Bool(default_value=True).tag(config=True)
+    remove_line: bool = traitlets.Bool(default_value=True).tag(config=True)
     """By default remove the matching line in the code-cell."""
-    delimiter = Unicode(default_value="=").tag(config=True)
+    delimiter: str = traitlets.Unicode(default_value="=").tag(config=True)
     """Delimiter that separates the key from the value."""
-    value_to_yaml = Bool(default_value=False).tag(config=True)
+    value_to_yaml: bool = traitlets.Bool(default_value=False).tag(config=True)
     """Parse the value as yaml syntax before writing it as a dictionary. Default is `False`."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         if self.metadata_group == "":
             raise ValueError("metadata_group myst be non-empty string!")
 
-    def _write_entry(self, key, value, cell):
+    def _write_entry(self, key: str, value: str, cell: NotebookNode) -> NotebookNode:
         entries = cell.setdefault("metadata", {}).setdefault(self.metadata_group, {})
         if not isinstance(entries, dict):
             raise RuntimeError(
@@ -103,7 +108,9 @@ class MetaDataMapInjectorPreprocessor(Preprocessor):
         entries[key] = value
         return cell
 
-    def preprocess_cell(self, cell, resource, index):
+    def preprocess_cell(
+        self, cell: NotebookNode, resource: Union[Dict, None], _index: int
+    ) -> Tuple[NotebookNode, Union[Dict, None]]:
         """Inject metadata dict entry to code-cell if match is found"""
         if cell["cell_type"] == "markdown":
             return cell, resource

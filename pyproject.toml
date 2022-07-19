@@ -54,7 +54,7 @@ test = [
     "coverage>=6.4.2",
 ]
 lint = [
-    "black",
+    "black[jupyter]>=22.6.0",
     "isort",
     "nbstripout",
     "mypy",
@@ -67,15 +67,22 @@ dev = [
     "sphinx-design>=0.2.0",
     "hypothesis>=6.50.1",
 ]
+mypy = [
+    "types-PyYAML>=6.0.10",
+    "pandas-stubs>=1.4.3.220718",
+]
+
 [tool.mypy]
 exclude = ["tests"]
 # common plugins:
 # plugins = "numpy.typing.mypy_plugin"
 
+[[tool.mypy.overrides]]
+module = "nbconvert.*"
+ignore_missing_imports = true
+
 [tool.isort]
 profile = "black"
-
-
 
 [tool.pdm.scripts]
 black = "black ."
@@ -85,11 +92,11 @@ tests = "coverage run --source common_nb_preprocessors -m pytest tests"
 coverage_report = "coverage report --fail-under 95"
 coverage_html_report = "coverage html"
 
-mypy = "mypy ."
+check_types = "mypy common_nb_preprocessors"
 lint.composite = [
     "black",
     "isort",
-    "mypy",
+    "check_types",
 ]
 lint.help = "Will check if all files are formatted with black & isort"
 

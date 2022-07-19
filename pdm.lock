@@ -84,6 +84,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "black"
+version = "22.6.0"
+extras = ["jupyter"]
+requires_python = ">=3.6.2"
+summary = "The uncompromising code formatter."
+dependencies = [
+    "black==22.6.0",
+    "ipython>=7.8.0",
+    "tokenize-rt>=3.2.0",
+]
+
+[[package]]
 name = "bleach"
 version = "5.0.1"
 requires_python = ">=3.7"
@@ -737,6 +749,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "pandas-stubs"
+version = "1.4.3.220718"
+requires_python = ">=3.8,<3.11"
+summary = "Type annotations for pandas"
+dependencies = [
+    "types-pytz>=2022.1.1",
+]
+
+[[package]]
 name = "pandocfilters"
 version = "1.5.0"
 requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -1174,6 +1195,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "tokenize-rt"
+version = "4.2.1"
+requires_python = ">=3.6.1"
+summary = "A wrapper around the stdlib `tokenize` which roundtrips."
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 requires_python = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
@@ -1205,6 +1232,16 @@ name = "traitlets"
 version = "5.3.0"
 requires_python = ">=3.7"
 summary = ""
+
+[[package]]
+name = "types-pytz"
+version = "2022.1.2"
+summary = "Typing stubs for pytz"
+
+[[package]]
+name = "types-pyyaml"
+version = "6.0.10"
+summary = "Typing stubs for PyYAML"
 
 [[package]]
 name = "typing-extensions"
@@ -1268,7 +1305,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:ea0d4c167525c5c81f556c0902b62ba54b05b57ede985b46ab29a3e32a1e9630"
+content_hash = "sha256:a7370ff8b8d496df8e2aa58c904f0113af536b75a808d75617dd76b4602570c5"
 
 [metadata.files]
 "alabaster 0.7.12" = [
@@ -1978,6 +2015,10 @@ content_hash = "sha256:ea0d4c167525c5c81f556c0902b62ba54b05b57ede985b46ab29a3e32
     {url = "https://files.pythonhosted.org/packages/60/a6/998a96dfc6375874670b140c1dab6125fcec49736555cfdcb41e39187642/pandas-1.4.3-cp39-cp39-win_amd64.whl", hash = "sha256:721a3dd2f06ef942f83a819c0f3f6a648b2830b191a72bbe9451bcd49c3bd42e"},
     {url = "https://files.pythonhosted.org/packages/f4/00/2de395c769335956b8650f990ef2a15e860be83b544c408ff95713446329/pandas-1.4.3.tar.gz", hash = "sha256:2ff7788468e75917574f080cd4681b27e1a7bf36461fe968b49a87b5a54d007c"},
 ]
+"pandas-stubs 1.4.3.220718" = [
+    {url = "https://files.pythonhosted.org/packages/3b/df/eebfa2398bd6c00094c0723c917369cf697a4cc847b61eb446916950e29f/pandas-stubs-1.4.3.220718.tar.gz", hash = "sha256:b1ce4d805c56b98c3453935bbedc46b96d169701137c4e03cff7d22731c6bad5"},
+    {url = "https://files.pythonhosted.org/packages/13/88/e77c2847eaaf163abaf318226d24f825afedbb35646ebb0d2bcb904abc1f/pandas_stubs-1.4.3.220718-py3-none-any.whl", hash = "sha256:05e7b0b2cb2b1f07ce27ea8b360b3bdf11e602cf44276199ca7f88a2c2705784"},
+]
 "pandocfilters 1.5.0" = [
     {url = "https://files.pythonhosted.org/packages/5e/a8/878258cffd53202a6cc1903c226cf09e58ae3df6b09f8ddfa98033286637/pandocfilters-1.5.0-py2.py3-none-any.whl", hash = "sha256:33aae3f25fd1a026079f5d27bdd52496f0e0803b3469282162bafdcbdf6ef14f"},
     {url = "https://files.pythonhosted.org/packages/62/42/c32476b110a2d25277be875b82b5669f2cdda7897c165bd22b78f366b3cb/pandocfilters-1.5.0.tar.gz", hash = "sha256:0b679503337d233b4339a817bfc8c50064e2eff681314376a47cb582305a7a38"},
@@ -2438,6 +2479,10 @@ content_hash = "sha256:ea0d4c167525c5c81f556c0902b62ba54b05b57ede985b46ab29a3e32
     {url = "https://files.pythonhosted.org/packages/53/7b/5dba39bf0572f1f28e2844f08f74a73482a381de1d1feac3bbc6b808051e/tinycss2-1.1.1-py3-none-any.whl", hash = "sha256:fe794ceaadfe3cf3e686b22155d0da5780dd0e273471a51846d0a02bc204fec8"},
     {url = "https://files.pythonhosted.org/packages/1e/5a/576828164b5486f319c4323915b915a8af3fa4a654bbb6f8fc8e87b5cb17/tinycss2-1.1.1.tar.gz", hash = "sha256:b2e44dd8883c360c35dd0d1b5aad0b610e5156c2cb3b33434634e539ead9d8bf"},
 ]
+"tokenize-rt 4.2.1" = [
+    {url = "https://files.pythonhosted.org/packages/2f/e2/654a25ad594df2eb07f76e405f6f261d8fa9b5c06eb1e78549a086245455/tokenize_rt-4.2.1-py2.py3-none-any.whl", hash = "sha256:08a27fa032a81cf45e8858d0ac706004fcd523e8463415ddf1442be38e204ea8"},
+    {url = "https://files.pythonhosted.org/packages/2c/9c/d7c5d9e83bf5a2b52f9505ac3ce092c8788d10632ad8341b649a0906852a/tokenize_rt-4.2.1.tar.gz", hash = "sha256:0d4f69026fed520f8a1e0103aa36c406ef4661417f20ca643f913e33531b3b94"},
+]
 "toml 0.10.2" = [
     {url = "https://files.pythonhosted.org/packages/44/6f/7120676b6d73228c96e17f1f794d8ab046fc910d781c8d151120c3f1569e/toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
     {url = "https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
@@ -2466,6 +2511,14 @@ content_hash = "sha256:ea0d4c167525c5c81f556c0902b62ba54b05b57ede985b46ab29a3e32
 "traitlets 5.3.0" = [
     {url = "https://files.pythonhosted.org/packages/83/a9/1059771062cb80901c34a4dea020e76269412e69300b4ba12e3356865ad8/traitlets-5.3.0-py3-none-any.whl", hash = "sha256:65fa18961659635933100db8ca120ef6220555286949774b9cfc106f941d1c7a"},
     {url = "https://files.pythonhosted.org/packages/b2/ed/3c842dbe5a8f0f1ebf3f5b74fc1a46601ed2dfe0a2d256c8488d387b14dd/traitlets-5.3.0.tar.gz", hash = "sha256:0bb9f1f9f017aa8ec187d8b1b2a7a6626a2a1d877116baba52a129bfa124f8e2"},
+]
+"types-pytz 2022.1.2" = [
+    {url = "https://files.pythonhosted.org/packages/60/1e/0619a911fed3fe1a1f050d4e433b67f8b74a74c61d0b2ba50c847761614a/types-pytz-2022.1.2.tar.gz", hash = "sha256:1a8b25c225c5e6bd8468aa9eb45ddd3b337f6716d4072ad0aa4ef1e41478eebc"},
+    {url = "https://files.pythonhosted.org/packages/28/f4/a6a3f28aed2d9de336c032314713981ce6f8786e37c431323dd74a218ee1/types_pytz-2022.1.2-py3-none-any.whl", hash = "sha256:8aa9fd2af9dee5f5bd7221c6804c9addeafa7ebc0008f544d4ace02b066818a4"},
+]
+"types-pyyaml 6.0.10" = [
+    {url = "https://files.pythonhosted.org/packages/68/94/462c0d9febb7b9e6d229a4ed040a082c726e5fd21c82c1ecc787aaf721aa/types-PyYAML-6.0.10.tar.gz", hash = "sha256:a1676caeb098096833fe2f1472e7ea8debf7663222964fa90545cfaafebf3385"},
+    {url = "https://files.pythonhosted.org/packages/a7/ff/690c640a821b4afaf11cffb5fb8a08c589b58fc5a8d91f837d02e2690f77/types_PyYAML-6.0.10-py3-none-any.whl", hash = "sha256:18985a382c93fb12187daae6f57ce7787e3651cd590291c907d3e757919689ff"},
 ]
 "typing-extensions 4.3.0" = [
     {url = "https://files.pythonhosted.org/packages/ed/d6/2afc375a8d55b8be879d6b4986d4f69f01115e795e36827fd3a40166028b/typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
