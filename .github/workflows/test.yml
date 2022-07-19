@@ -28,7 +28,7 @@ jobs:
           enable-pep582: false
       - name: Install dependencies
         run: |
-          pdm sync --dev
+          pdm install --dev
       - name: Check precommit
         run: |
           pdm run pre-commit run --all-files
