@@ -3,6 +3,7 @@ docs/jupyter_execute/
 .vscode/
 *.tmp
 notebooks/dev.ipynb
+__pypackages__/
 ###
 
 .pdm.toml

@@ -1,10 +1,14 @@
 try:
+    import bs4
+    import html5lib
     import pandas
 except ImportError:
     raise ImportError(
-        "This module is only used during development and requires pandas."
+        """\
+        This module is only used during development and requires
+        pandas + the `read_html` dependencies (bs4 and html5lib).
+        """
     )
-from typing import List
 
 
 def _read_unique_pd_table(url: str, match: str) -> pandas.DataFrame:
@@ -20,39 +24,17 @@ def _read_unique_myst_nb_table(match: str) -> pandas.DataFrame:
     )
 
 
-def _read_unique_jupyter_book_table(match: str) -> pandas.DataFrame:
-    return _read_unique_pd_table(
-        url="https://jupyterbook.org/en/latest/reference/cheatsheet.html#myst-cheatsheet-code-cell-tags",
-        match=match,
-    )
+# def _read_unique_jupyter_book_table(match: str) -> pandas.DataFrame:
+#     return _read_unique_pd_table(
+#         url="https://jupyterbook.org/en/latest/reference/cheatsheet.html#myst-cheatsheet-code-cell-tags",
+#         match=match,
+#     )
 
 
-def _myst_nb_cell_tags() -> List[str]:
-    _myst_nb_cell_tags = _read_unique_myst_nb_table("remove-cell")
-    return _myst_nb_cell_tags["Tag"].tolist()
-
-
-def _nbclient_cell_tags() -> List[str]:
-    _nbclient_cell_tags = _read_unique_myst_nb_table("skip-execution")
-    return _nbclient_cell_tags["Tag"].tolist()
-
-
-def myst_nb_cell_tags() -> List[str]:
-    """
-    Return MyST-NB tags and nbclient tags, as both
-    are used within MyST-NB.
-    """
-    return _myst_nb_cell_tags() + _nbclient_cell_tags()
-
-
-def jupyter_book_cell_tags() -> List[str]:
-    """
-    Return Jupyter-Book tags.
-    """
-    df = _read_unique_jupyter_book_table("hide-input")
-    tag_col = df["Tag option"].astype(str).str.strip("'\"")
-    return tag_col.tolist()
-
-
-def myst_mystgroup_cell_conf() -> List[str]:
-    return _read_unique_myst_nb_table("^markdown_format$")["Name"].tolist()
+# def jupyter_book_cell_tags() -> List[str]:
+#     """
+#     Return Jupyter-Book tags.
+#     """
+#     df = _read_unique_jupyter_book_table("hide-input")
+#     tag_col = df["Tag option"].astype(str).str.strip("'\"")
+#     return tag_col.tolist()

@@ -50,11 +50,27 @@ class MystNBCellTags(str, Enum):
     See :ref:`sec/skip-execution` for a visual example.
     """
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value
 
-    # could also include code to parse the values with pandas
-    # from the main page
+    @classmethod
+    def _validate(cls) -> None:
+        """
+        Internal use only!
+        Requires the development dependency pandas with
+        the html-dependencies.
+        Will parse the values from the website and check them
+        with the values from the current file.
+        If they aren't identical, a RuntimeError will be raised.
+        """
+        from ._constant_builder import _read_unique_myst_nb_table
+
+        _myst_nb_cell_tags = _read_unique_myst_nb_table(match="remove-cell")
+        cell_tags = _myst_nb_cell_tags["Tag"].tolist()
+        _nbclient_cell_tags = _read_unique_myst_nb_table(match="skip-execution")
+        cell_tags.extend(_nbclient_cell_tags["Tag"].tolist())
+        if set(cell_tags) != set(cls):
+            raise RuntimeError(f"{cls} out-of-date!")
 
 
 class MystNBCellConf(str, Enum):
@@ -150,8 +166,24 @@ class MystNBCellConf(str, Enum):
     See :ref:`sec/figure` for a visual example.
     """
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value
+
+    @classmethod
+    def _validate(cls) -> None:
+        """
+        Internal use only!
+        Requires the development dependency pandas with
+        the html-dependencies.
+        Will parse the values from the website and check them
+        with the values from the current file.
+        If they aren't identical, a RuntimeError will be raised.
+        """
+        from ._constant_builder import _read_unique_myst_nb_table
+
+        cell_tags = _read_unique_myst_nb_table("^markdown_format$")["Name"].tolist()
+        if set(cell_tags) != set(cls):
+            raise RuntimeError(f"{cls} out-of-date!")
 
 
 # MYST_NB_CELL_CONF = [
@@ -183,7 +215,7 @@ class MystNBCellConf(str, Enum):
 
 def myst_nb_metadata_injector(
     file_content: str, prefix: str = "#", remove_line: bool = True, delimiter="="
-):
+) -> nbformat.NotebookNode:
     """
     The preprocessor will inject all the MyST-NB specific tags into the
     metadata `tags` and the cell level configuration to the `mystnb` field.

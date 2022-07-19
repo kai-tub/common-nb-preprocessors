@@ -21,7 +21,7 @@ dependencies = [
 [project.urls]
 homepage = "https://github.com/kai-tub/common-nb-preprocessors/"
 repository = "https://github.com/kai-tub/common-nb-preprocessors/"
-documentation = "https://github.com/kai-tub.github.io/common-nb-preprocessors"
+documentation = "kai-tub.github.io/common-nb-preprocessors/"
 
 [project.optional-dependencies]
 [build-system]
@@ -51,6 +51,7 @@ test = [
     "pre-commit",
     "jupyter",
     "notebook",
+    "coverage>=6.4.2",
 ]
 lint = [
     "black",
@@ -79,6 +80,10 @@ profile = "black"
 [tool.pdm.scripts]
 black = "black ."
 isort = "isort ."
+tests = "coverage run --source common_nb_preprocessors -m pytest tests"
+# manually adjust per project the fail-under settings
+coverage_report = "coverage report --fail-under 95"
+coverage_html_report = "coverage html"
 
 mypy = "mypy ."
 lint.composite = [
@@ -93,5 +98,8 @@ build-docs.help = "Build Sphinx documentation"
 serve-sphinx-docs.cmd = "sphinx-autobuild docs docs/_build --open-browser"
 serve-sphinx-docs.help = "Serve the Sphinx documentation with sphinx-autobuild"
 
-tests.cmd = "pytest tests/"
-tests.help = "Call test-runner"
+coverage_html.composite = [
+    "tests",
+    "coverage_html_report"
+]
+coverage_html.help = "Run the coverage with pytest and produce the html"
