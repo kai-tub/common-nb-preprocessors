@@ -28,7 +28,6 @@ jobs:
       - name: Install dependencies
         run: |
           pdm install --dev
-          ls -lah
       - name: Check precommit
         run: |
           pdm run pre-commit run --all-files

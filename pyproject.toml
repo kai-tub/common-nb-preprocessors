@@ -80,8 +80,9 @@ profile = "black"
 [tool.pdm.scripts]
 black = "black ."
 isort = "isort ."
-tests = "coverage run --source common_nb_preprocessors  --omit 'venv/*,__pypackages__/*,tests/*' -m pytest tests/"
-coverage_report = "coverage report"
+tests = "coverage run --source common_nb_preprocessors -m pytest tests"
+# manually adjust per project the fail-under settings
+coverage_report = "coverage report --fail-under 95"
 coverage_html_report = "coverage html"
 
 mypy = "mypy ."
