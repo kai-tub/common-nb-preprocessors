@@ -28,7 +28,9 @@ jobs:
           enable-pep582: false
       - name: Install dependencies
         run: |
+          rm -r __pypackages__
           pdm install --dev
+          ls -lah
       - name: Check precommit
         run: |
           pdm run pre-commit run --all-files
