@@ -1,5 +1,8 @@
+from typing import Dict, Tuple, Union
+
+import traitlets
 from nbconvert.preprocessors import Preprocessor
-from traitlets import Set, Unicode
+from nbformat import NotebookNode
 
 __all__ = ["TagsKeepPreprocessor"]
 
@@ -9,13 +12,17 @@ class TagsKeepPreproccesor(Preprocessor):
     Only keep *code* cells that have the given metadata
     """
 
-    tags = Set(Unicode(), default_value=[]).tag(config=True)
+    tags = traitlets.List(traitlets.Unicode()).tag(config=True)
 
-    def preprocess(self, nb, resources):
+    def preprocess(
+        self, nb: NotebookNode, resources: Union[None, Dict]
+    ) -> Tuple[NotebookNode, Union[Dict, None]]:
         nb.cells = [
             cell
             for cell in nb.cells
-            if self.tags.intersection(cell.get("metadata", {}).get("tags", []))
+            if set(self.tags).intersection(
+                set(cell.get("metadata", {}).get("tags", []))
+            )
             or cell["cell_type"] != "code"
         ]
         return nb, resources

@@ -27,16 +27,39 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          pdm install --dev
+          pdm install --dev --group :all
       - name: Check precommit
         run: |
           pdm run pre-commit run --all-files
-      # - name: Test mypy
-      #   run: |
-      #     pdm run mypy common_nb_preprocessors
+      - name: Test mypy
+        run: |
+          pdm run check_types
       - name: Run tests from within PDM with coverage
         run: |
           pdm run tests
+      - uses: actions/upload-artifact@v2
+        with:
+          name: coverage-data
+          path: ".coverage.*"
+          # allow to skip specific python version
+          if-no-files-found: ignore
+  coverage_reporter:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python and PDM
+        uses: pdm-project/setup-pdm@main
+        with:
+          python-version: "3.8"
+      - name: Install coverage reporting deps
+        run: |
+          pdm install --group test
+      - uses: actions/download-artifact@v2
+        with:
+          name: coverage-data
       - name: Code coverage-reporter
         uses: tj-actions/coverage-reporter@v5.1
         with:

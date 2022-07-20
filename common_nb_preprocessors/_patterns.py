@@ -1,14 +1,23 @@
 import re
+import sys
 
-from pydantic import constr, validate_arguments
+from pydantic import Field, validate_arguments
 
 __all__ = ["build_prefixed_regex_pattern", "build_prefixed_regex_pattern_with_value"]
+
+# Package only support >= 3.8
+if sys.version_info[:2] == (3, 8):
+    from typing import Pattern
+else:
+    from re import Pattern
 
 
 @validate_arguments
 def build_prefixed_regex_pattern(
-    *, prefix: constr(min_length=1), key_term: constr(min_length=1)
-) -> re.Pattern:
+    *,
+    prefix: str = Field(..., min_length=1),
+    key_term: str = Field(..., min_length=1),
+) -> Pattern[str]:
     """
     A regular expression builder that returns a compiled
     regular expression that matches a string if:
@@ -37,10 +46,10 @@ def build_prefixed_regex_pattern(
 @validate_arguments
 def build_prefixed_regex_pattern_with_value(
     *,
-    prefix: constr(min_length=1),
-    key_term: constr(min_length=1),
-    delimiter: constr(min_length=1) = "=",
-) -> re.Pattern:
+    prefix: str = Field(..., min_length=1),
+    key_term: str = Field(..., min_length=1),
+    delimiter: str = Field("=", min_length=1),
+) -> Pattern[str]:
     """
     A regular expression builder that returns a compiled
     regular expression that matches a string with:

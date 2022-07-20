@@ -1,6 +1,6 @@
 try:
-    import bs4
-    import html5lib
+    import bs4  # type: ignore
+    import html5lib  # type: ignore
     import pandas
 except ImportError:
     raise ImportError(

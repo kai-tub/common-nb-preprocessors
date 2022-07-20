@@ -214,7 +214,7 @@ class MystNBCellConf(str, Enum):
 
 
 def myst_nb_metadata_injector(
-    file_content: str, prefix: str = "#", remove_line: bool = True, delimiter="="
+    file_content: str, prefix: str = "#", remove_line: bool = True, delimiter: str = "="
 ) -> nbformat.NotebookNode:
     """
     The preprocessor will inject all the MyST-NB specific tags into the
