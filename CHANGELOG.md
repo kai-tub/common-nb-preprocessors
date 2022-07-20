@@ -1,3 +1,19 @@
+# v0.1.4 (Wed Jul 20 2022)
+
+#### 🐛 Bug Fix
+
+- Mypy [#6](https://github.com/kai-tub/common-nb-preprocessors/pull/6) ([@kai-tub](https://github.com/kai-tub))
+
+#### 📝 Documentation
+
+- Update README.md [#5](https://github.com/kai-tub/common-nb-preprocessors/pull/5) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v0.1.3 (Tue Jul 19 2022)
 
 #### 🐛 Bug Fix
