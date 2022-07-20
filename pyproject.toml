@@ -87,9 +87,12 @@ profile = "black"
 [tool.pdm.scripts]
 black = "black ."
 isort = "isort ."
-tests = "coverage run --source common_nb_preprocessors -m pytest tests"
+tests = "coverage run --parallel --source common_nb_preprocessors -m pytest tests"
 # manually adjust per project the fail-under settings
-coverage_report = "coverage report --fail-under 95"
+coverage_report.composite = [
+    "coverage combine",
+    "coverage report --fail-under 95",
+]
 coverage_html_report = "coverage html"
 
 check_types = "mypy common_nb_preprocessors"

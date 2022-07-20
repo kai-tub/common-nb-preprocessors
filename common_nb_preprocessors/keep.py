@@ -20,7 +20,9 @@ class TagsKeepPreproccesor(Preprocessor):
         nb.cells = [
             cell
             for cell in nb.cells
-            if self.tags.intersection(cell.get("metadata", {}).get("tags", []))
+            if set(self.tags).intersection(
+                set(cell.get("metadata", {}).get("tags", []))
+            )
             or cell["cell_type"] != "code"
         ]
         return nb, resources
