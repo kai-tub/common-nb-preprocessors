@@ -20,14 +20,14 @@ class NestedDictInvalidDictError(NestedDictUpdateError):
 
 
 @singledispatch
-def _nested_dict_updater_helper(d: object, keys: List[str], _value):
+def _nested_dict_updater_helper(d: object, keys: List[str], _value) -> None:
     raise NestedDictInvalidDictError(
         f"Expected a dictionary! Won't overwrite entry {d} to set nested keys {keys}"
     )
 
 
 @_nested_dict_updater_helper.register
-def _(d: MutableMapping, keys: List[str], value):
+def _(d: MutableMapping, keys: List[str], value) -> None:
     if len(keys) == 1:
         final_key = keys[0]
         # should also check for other 'nested' types => always fail
