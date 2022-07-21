@@ -8,7 +8,7 @@ from common_nb_preprocessors.metadata_injector import (
 )
 
 
-def test_metadata_injector():
+def test_metadata_list_injector():
     nb = nbformat.v4.new_notebook()
     nb.cells.append(nbformat.v4.new_code_cell("# hide\nimport os"))
     nb.cells.append(nbformat.v4.new_markdown_cell("# This is the actual title"))
@@ -73,6 +73,7 @@ def test_metadata_map_injector_remove_line(
         remove_line=remove_line,
         delimiter=delimiter,
         metadata_group=metadata_group,
+        allow_nested_keys=False,
     ).preprocess(nb, None)
     assert nb.cells[0]["source"] == cell_source_output
     # check that parsing works as expected
@@ -103,6 +104,69 @@ def test_metadata_map_injector_delimiter(delimiter, cell_comment):
     injected_map = nb.cells[-1]["metadata"]["mystnb"]
     assert list(injected_map.keys()) == keys
     assert injected_map[keys[0]] == "true"
+
+
+def test_metadata_map_injector_multiple_matches():
+    code_cell_text = f"# hide = true\n# hide = false\nimport lib"
+    nb = nbformat.v4.new_notebook()
+    nb.cells.append(nbformat.v4.new_code_cell(code_cell_text))
+    nb, _ = MetaDataMapInjectorPreprocessor(
+        keys=["hide"],
+        prefix="#",
+        metadata_group="mystnb",
+        delimiter="=",
+        remove_line=True,
+        allow_nested_keys=False,
+    ).preprocess(nb, None)
+    injected_map = nb.cells[0]["metadata"]["mystnb"]
+    assert list(injected_map.keys()) == ["hide"]
+    assert len(nb.cells[0]["source"].splitlines()) == 1
+    assert injected_map["hide"] == "false"
+
+
+@pytest.mark.parametrize(
+    "inp_comment, output_val",
+    [
+        ("hide = true", True),
+        ("hide = false", False),
+        ("hide = I am a string", "I am a string"),
+        ("hide = 42", 42),
+    ],
+)
+def test_metadata_map_injector_multiple_to_yaml(inp_comment, output_val):
+    code_cell_text = f"# {inp_comment}\nimport lib"
+    nb = nbformat.v4.new_notebook()
+    nb.cells.append(nbformat.v4.new_code_cell(code_cell_text))
+    nb, _ = MetaDataMapInjectorPreprocessor(
+        keys=["hide"],
+        prefix="#",
+        metadata_group="mystnb",
+        delimiter="=",
+        remove_line=True,
+        allow_nested_keys=False,
+        value_to_yaml=True,
+    ).preprocess(nb, None)
+    injected_map = nb.cells[0]["metadata"]["mystnb"]
+    assert list(injected_map.keys()) == ["hide"]
+    assert injected_map["hide"] == output_val
+
+
+def test_metadata_map_injector_multiple_nested_access():
+    code_cell_text = f"# hide.nested = true\n# hide.other = false\nimport lib"
+    nb = nbformat.v4.new_notebook()
+    nb.cells.append(nbformat.v4.new_code_cell(code_cell_text))
+    nb, _ = MetaDataMapInjectorPreprocessor(
+        keys=["hide"],
+        prefix="#",
+        metadata_group="mystnb",
+        delimiter="=",
+        remove_line=True,
+        allow_nested_keys=True,
+    ).preprocess(nb, None)
+    injected_map = nb.cells[0]["metadata"]["mystnb"]
+    assert list(injected_map.keys()) == ["hide"]
+    assert len(nb.cells[0]["source"].splitlines()) == 1
+    assert injected_map["hide"] == {"nested": "true", "other": "false"}
 
 
 def test_metadata_map_injector_empty_metadata_group():

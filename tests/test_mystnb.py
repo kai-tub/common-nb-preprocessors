@@ -44,3 +44,26 @@ def test_myst_nb_metadata_injector(prefix: str, remove_line: bool, delimiter: st
         assert len_source_lines == 2
     else:
         assert len_source_lines == 4
+
+
+def test_myst_nb_metadata_injector_syntax_sugar():
+    nb = nbformat.v4.new_notebook()
+    src = f"""\
+        # figure.caption = I am a string
+        # figure.caption_before = true
+        other code line\
+    """
+    nb.cells.append(nbformat.v4.new_code_cell(src))
+    new_nb = myst_nb_metadata_injector(
+        nbformat.writes(nb),
+        prefix="#",
+        delimiter="=",
+        remove_line=True,
+    )
+    assert new_nb.cells[0].hasattr("metadata")
+    assert new_nb.cells[0].metadata.hasattr("mystnb")
+    assert new_nb.cells[0].metadata.mystnb == {
+        "figure": {"caption": "I am a string", "caption_before": True}
+    }
+    len_source_lines = len(new_nb.cells[0].source.splitlines())
+    assert len_source_lines == 1
