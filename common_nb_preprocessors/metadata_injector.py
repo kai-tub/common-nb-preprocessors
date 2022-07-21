@@ -1,11 +1,11 @@
-from collections.abc import Collection
-from typing import Any, Dict, List, Tuple, Union
+from typing import Dict, List, Tuple, Union
 
 import traitlets
 import yaml
 from nbconvert.preprocessors import Preprocessor
 from nbformat import NotebookNode
 
+from ._nested_dict_updater import nested_dict_updater
 from ._patterns import (
     build_prefixed_regex_pattern,
     build_prefixed_regex_pattern_with_value,
@@ -15,48 +15,6 @@ __all__ = [
     "MetaDataListInjectorPreprocessor",
     "MetaDataMapInjectorPreprocessor",
 ]
-
-
-from collections.abc import MutableMapping
-from functools import singledispatch
-
-
-@singledispatch
-def _nested_dict_updater_helper(d: object, _keys: List[str], _value):
-    raise RuntimeError(
-        f"Expected a dictionary! Won't overwrite entry {d} to set nested key!"
-    )
-
-
-@_nested_dict_updater_helper.register
-def _(d: MutableMapping, keys: List[str], value):
-    if len(keys) == 1:
-        final_key = keys[0]
-        # should also check for other 'nested' types => always fail
-        # also check if Type changes, if it does, also raise an Exception
-        if final_key in d.keys():
-            if not isinstance(d[final_key], type(value)):
-                raise TypeError(
-                    f"Will not overwrite value: {value} of type {type(value)} with {d[final_key]} of type: {type(d[final_key])}"
-                )
-            if isinstance(d[final_key], Collection) and not isinstance(
-                d[final_key], str
-            ):
-                raise RuntimeError(
-                    f"Setting the value of entry '{final_key}' with value {value} would overwrite collection: {d[final_key]}"
-                    + "\n"
-                    + "Overwriting of collections is not allowed, even if the same collection type is used!"
-                )
-        d[keys[0]] = value
-        return
-    d = d.setdefault(keys[0], {})
-    _nested_dict_updater_helper(d, keys[1:], value)
-
-
-def _nested_dict_updater(d: Union[Dict, Any], keys: List[str], value: Any) -> None:
-    """**Inplace** nested dictionary updater."""
-    # TODO: Write documentation and create wrapper that better explains the error message
-    _nested_dict_updater_helper(d, keys, value)
 
 
 class MetaDataListInjectorPreprocessor(Preprocessor):
@@ -145,7 +103,7 @@ class MetaDataMapInjectorPreprocessor(Preprocessor):
         if self.value_to_yaml:
             value = yaml.safe_load(value)
         keys = [key] if not self.allow_nested_keys else key.split(".")
-        _nested_dict_updater(entry, keys, value)
+        nested_dict_updater(entry, keys, value)
         return cell
 
     def preprocess_cell(
