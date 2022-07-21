@@ -1,3 +1,15 @@
+# v1.0.0 (Thu Jul 21 2022)
+
+#### 💥 Breaking Change
+
+- Nested-keys [#7](https://github.com/kai-tub/common-nb-preprocessors/pull/7) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v0.1.4 (Wed Jul 20 2022)
 
 #### 🐛 Bug Fix
