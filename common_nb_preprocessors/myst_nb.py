@@ -245,6 +245,7 @@ def myst_nb_metadata_injector(
         remove_line=remove_line,
         delimiter=delimiter,
         value_to_yaml=True,
+        allow_nested_keys=True,
     ).preprocess(nb, None)
     return nb
 

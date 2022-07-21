@@ -102,6 +102,32 @@ def test_pattern_with_value_delimiter_handling(delimiter, text):
     assert "true" == pattern.search(text).group("value")
 
 
+# If I am bored, I could rewrite these with hypothesis
+@pytest.mark.parametrize("delimiter", ["="])
+# hide will always be key_term!
+@pytest.mark.parametrize(
+    "inp_key_text,matched_key",
+    [
+        ("hide", "hide"),
+        ("hide ", "hide"),
+        ("hide.", "hide."),
+        ("hide. ", "hide."),
+        ("hide.two", "hide.two"),
+        ("hide.two ", "hide.two"),
+    ],
+)
+def test_pattern_with_value_key_expansion(delimiter, inp_key_text, matched_key):
+    prefix = "#"
+    key = "hide"
+    value = "true"
+    text = f"{prefix} {inp_key_text}{delimiter}{value}"
+    pattern = build_prefixed_regex_pattern_with_value(
+        prefix=prefix, key_term=key, delimiter=delimiter, expand_key_term=True
+    )
+    assert matched_key == pattern.search(text).group("key")
+    assert "true" == pattern.search(text).group("value")
+
+
 @pytest.mark.parametrize(
     "invalid_kwargs", [{"prefix": ""}, {"key_term": ""}, {"delimiter": ""}]
 )

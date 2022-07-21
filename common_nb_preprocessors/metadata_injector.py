@@ -5,6 +5,7 @@ import yaml
 from nbconvert.preprocessors import Preprocessor
 from nbformat import NotebookNode
 
+from ._nested_dict_updater import nested_dict_updater
 from ._patterns import (
     build_prefixed_regex_pattern,
     build_prefixed_regex_pattern_with_value,
@@ -61,8 +62,8 @@ class MetaDataListInjectorPreprocessor(Preprocessor):
             return cell, resource
         for string in self.strings:
             pattern = build_prefixed_regex_pattern(prefix=self.prefix, key_term=string)
-            m = pattern.search(cell.source)
-            if m is not None:
+            matches = pattern.finditer(cell.source)
+            for m in matches:
                 tag = m.group("key")
                 cell = self._write_tag(tag, cell)
             if self.remove_line:
@@ -90,23 +91,13 @@ class MetaDataMapInjectorPreprocessor(Preprocessor):
     """Delimiter that separates the key from the value."""
     value_to_yaml: bool = traitlets.Bool(default_value=False).tag(config=True)
     """Parse the value as yaml syntax before writing it as a dictionary. Default is `False`."""
+    allow_nested_keys: bool = traitlets.Bool(default_value=False).tag(config=True)
+    """Allow defining nested key access for nested setting of metadata group. Access next level with `.` (hardcoded)"""
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         if self.metadata_group == "":
             raise ValueError("metadata_group myst be non-empty string!")
-
-    def _write_entry(self, key: str, value: str, cell: NotebookNode) -> NotebookNode:
-        entries = cell.setdefault("metadata", {}).setdefault(self.metadata_group, {})
-        if not isinstance(entries, dict):
-            raise RuntimeError(
-                f"Trying to to set metadata dictionary but entry {self.metadata_group} is of type: {type(entries)}",
-                self.metadata_group,
-            )
-        if self.value_to_yaml:
-            value = yaml.safe_load(value)
-        entries[key] = value
-        return cell
 
     def preprocess_cell(
         self, cell: NotebookNode, resource: Union[Dict, None], _index: int
@@ -114,16 +105,23 @@ class MetaDataMapInjectorPreprocessor(Preprocessor):
         """Inject metadata dict entry to code-cell if match is found"""
         if cell["cell_type"] == "markdown":
             return cell, resource
-        for key in self.keys:
+        for key_term in self.keys:
             pattern = build_prefixed_regex_pattern_with_value(
                 prefix=self.prefix,
-                key_term=key,
+                key_term=key_term,
                 delimiter=self.delimiter,
+                expand_key_term=self.allow_nested_keys,
             )
-            m = pattern.search(cell.source)
-            if m is not None:
+            matches = pattern.finditer(cell.source)
+            for m in matches:
                 value = m.group("value")
-                cell = self._write_entry(key=key, value=value, cell=cell)
+                parsed_value = yaml.safe_load(value) if self.value_to_yaml else value
+                key = m.group("key")  # Could be expanded key!
+                keys = key.split(".") if self.allow_nested_keys else [key]
+                entry = cell.setdefault("metadata", {}).setdefault(
+                    self.metadata_group, {}
+                )
+                nested_dict_updater(entry, keys, parsed_value)
             if self.remove_line:
                 cell.source = pattern.sub("", cell.source)
         return cell, resource
