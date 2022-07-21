@@ -282,7 +282,8 @@ One is to <em>add</em> specific strings to the <code class="docutils literal not
 See <a class="reference internal" href="#sec-tags-conf"><span class="std std-ref">Tag configuration</span></a> for details on what is possible with this configuration method.
 The other configuration method is to <em>set</em> key-value pairs inside of the <code class="docutils literal notranslate"><span class="pre">mystnb</span></code> metadata tag of the code-cell.
 See <a class="reference internal" href="#sec-mystnb-conf"><span class="std std-ref">Myst-NB Metadata Configuration</span></a> for details.
-Note that the things you can configure are <em>mostly</em> different between both of these methods! You should take a look at <em>both</em>!</p>
+Note that the things you can configure are <em>mostly</em> different between both of these methods! You should take a look at <em>both</em>!
+I’ve also spend quite a lot of time to create some <em>syntax</em> sugar for settings nested key-value pairs. See <a class="reference internal" href="#sec-syntax-sugar"><span class="std std-ref">Syntax Sugar</span></a> for more details.</p>
 <p>If the last paragraph confused you, don’t worry.
 It is probably not that important for you as it discusses the <em>conceptual</em> difference between the two configuration options.
 The important thing to know is that the <code class="docutils literal notranslate"><span class="pre">tag</span></code> based configuration only allows you to <em>add</em> a string, while the other allows you to set a key-value pair.
@@ -827,6 +828,63 @@ To see a list of all possible configuration values, take a look at the <a class=
 </div>
 </section>
 </section>
+<section id="syntax-sugar">
+<span id="sec-syntax-sugar"></span><h2>Syntax Sugar<a class="headerlink" href="#syntax-sugar" title="Permalink to this headline">#</a></h2>
+<p>I’ve spent <em>way too much time</em> (and made the library significantly complexer) to allow nested key setting.
+This is especially useful for nested options such as <a class="reference internal" href="#sec-figure"><span class="std std-ref">figure</span></a> and <a class="reference internal" href="#sec-image"><span class="std std-ref">image</span></a>.
+So instead of writing a long line like the following:</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># figure = {&quot;caption&quot;: &quot;I am a top caption!&quot;, &quot;caption_before&quot;: true}</span>
+<span class="c1"># image = {&quot;width&quot;: &quot;10%&quot;, &quot;alt&quot;: &quot;Fish with party hat&quot;}</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;fish.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;fish.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="id3">
+<figcaption>
+<p><span class="caption-text">I am a top caption!</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<a class="reference internal image-reference" href="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png"><img alt="Fish with party hat" src="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png" style="width: 10%;" /></a>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>You could also write it in such a way that each option is on their own line and access the next <em>level</em> with using the dot (<code class="docutils literal notranslate"><span class="pre">.</span></code>) character.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># figure.caption = &quot;I am a top caption!&quot;</span>
+<span class="c1"># figure.caption_before = true</span>
+<span class="c1"># image.width = &quot;10%&quot;</span>
+<span class="c1"># image.alt = &quot;Fish with party hat&quot;</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;fish.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;fish.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="id4">
+<figcaption>
+<p><span class="caption-text">I am a top caption!</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+<a class="reference internal image-reference" href="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png"><img alt="Fish with party hat" src="_images/8805bb905c918293d73323a7663fc62884a9e0f108cf85be829e86e24d69fbdf.png" style="width: 10%;" /></a>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
 </section>
 
         </article>
@@ -917,6 +975,7 @@ To see a list of all possible configuration values, take a look at the <a class=
 <li><a class="reference internal" href="#figure">figure</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#syntax-sugar">Syntax Sugar</a></li>
 </ul>
 </li>
 </ul>

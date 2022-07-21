@@ -143,6 +143,7 @@
     "The other configuration method is to _set_ key-value pairs inside of the `mystnb` metadata tag of the code-cell.\n",
     "See [](sec/mystnb-conf) for details.\n",
     "Note that the things you can configure are _mostly_ different between both of these methods! You should take a look at _both_!\n",
+    "I've also spend quite a lot of time to create some _syntax_ sugar for settings nested key-value pairs. See [](sec/syntax_sugar) for more details.\n",
     "\n",
     "If the last paragraph confused you, don't worry.\n",
     "It is probably not that important for you as it discusses the _conceptual_ difference between the two configuration options.\n",
@@ -980,13 +981,77 @@
   {
    "cell_type": "markdown",
    "metadata": {},
-   "source": []
+   "source": [
+    "(sec/syntax_sugar)=\n",
+    "## Syntax Sugar\n",
+    "\n",
+    "I've spent _way too much time_ (and made the library significantly complexer) to allow nested key setting.\n",
+    "This is especially useful for nested options such as [](sec/figure) and [](sec/image).\n",
+    "So instead of writing a long line like the following:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Source:\n",
+    "\n",
+    "```python\n",
+    "# figure = {\"caption\": \"I am a top caption!\", \"caption_before\": true}\n",
+    "# image = {\"width\": \"10%\", \"alt\": \"Fish with party hat\"}\n",
+    "from IPython.display import Image\n",
+    "Image(\"fish.png\")\n",
+    "```"
+   ]
   },
   {
    "cell_type": "code",
    "execution_count": null,
    "metadata": {},
    "outputs": [],
+   "source": [
+    "# figure = {\"caption\": \"I am a top caption!\", \"caption_before\": true}\n",
+    "# image = {\"width\": \"10%\", \"alt\": \"Fish with party hat\"}\n",
+    "from IPython.display import Image\n",
+    "\n",
+    "Image(\"fish.png\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You could also write it in such a way that each option is on their own line and access the next _level_ with using the dot (`.`) character.\n",
+    "\n",
+    "```python\n",
+    "# figure.caption = \"I am a top caption!\"\n",
+    "# figure.caption_before = true\n",
+    "# image.width = \"10%\"\n",
+    "# image.alt = \"Fish with party hat\"\n",
+    "from IPython.display import Image\n",
+    "\n",
+    "Image(\"fish.png\")\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# figure.caption = \"I am a top caption!\"\n",
+    "# figure.caption_before = true\n",
+    "# image.width = \"10%\"\n",
+    "# image.alt = \"Fish with party hat\"\n",
+    "from IPython.display import Image\n",
+    "\n",
+    "Image(\"fish.png\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
    "source": []
   }
  ],
