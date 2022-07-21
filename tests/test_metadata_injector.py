@@ -1,13 +1,76 @@
-from typing import Dict
-
 import nbformat
 import pytest
-from traitlets import TraitError
 
 from common_nb_preprocessors.metadata_injector import (
     MetaDataListInjectorPreprocessor,
     MetaDataMapInjectorPreprocessor,
+    _nested_dict_updater,
+    _nested_dict_updater_helper,
 )
+
+
+@pytest.mark.parametrize(
+    "inp_dict,keys,value,out_dict",
+    [
+        ({}, ["a"], 1, {"a": 1}),
+        ({}, ["a"], "1", {"a": "1"}),
+        ({}, ["a", "b"], 1, {"a": {"b": 1}}),
+        ({}, ["a", "b", "c"], 1, {"a": {"b": {"c": 1}}}),
+        ({"a": 1}, ["a"], 2, {"a": 2}),
+        ({"a": {"b": {"c": "z"}}}, ["a", "b", "c"], "1", {"a": {"b": {"c": "1"}}}),
+        ({"a": 1}, ["b"], 2, {"a": 1, "b": 2}),
+        (
+            {"a": {"b": 1, "c": 2}, "d": 3},
+            ["a", "b"],
+            9,
+            {"a": {"b": 9, "c": 2}, "d": 3},
+        ),
+    ],
+)
+def test_nested_dict_updater_helper(inp_dict, keys, value, out_dict):
+    # works in-place!
+    _nested_dict_updater_helper(inp_dict, keys, value)
+    assert inp_dict == out_dict
+
+
+@pytest.mark.parametrize(
+    "inp_dict,keys",
+    [
+        (["not_dict"], ["a"]),
+        ({"a": 1}, ["a", "b"]),
+        ({"a": {"b": 1}}, ["a", "b", "c"]),
+    ],
+)
+def test_nested_dict_updater_helper_invalid_nesting(inp_dict, keys):
+    with pytest.raises(RuntimeError, match="Won't overwrite .* to set nested key"):
+        _nested_dict_updater_helper(inp_dict.copy(), keys, {"b": 1})
+
+
+@pytest.mark.parametrize(
+    "inp_dict,keys,value",
+    [
+        ({"a": {"b": 1}}, ["a"], 1),
+        ({"a": {"b": 1}}, ["a", "b"], "1"),
+        ({"a": {"b": 1}}, ["a", "b"], [1]),
+    ],
+)
+def test_nested_dict_updater_helper_invalid_type_setting(inp_dict, keys, value):
+    with pytest.raises(TypeError, match="Will not overwrite"):
+        _nested_dict_updater_helper(inp_dict.copy(), keys, value)
+
+
+@pytest.mark.parametrize(
+    "inp_dict,keys,value",
+    [
+        ({"a": {"b": 1}}, ["a"], {"b": 2, "c": 1}),
+        ({"a": {"b": 1}}, ["a"], {"b": 1}),
+        ({"a": [1]}, ["a"], [2]),
+        ({"a": {1}}, ["a"], {2}),
+    ],
+)
+def test_nested_dict_updater_helper_invalid_collection_setting(inp_dict, keys, value):
+    with pytest.raises(RuntimeError, match="would overwrite collection"):
+        _nested_dict_updater_helper(inp_dict.copy(), keys, value)
 
 
 def test_metadata_injector():
@@ -167,7 +230,7 @@ def test_metadata_map_type_clash():
     nb.cells.append(
         nbformat.v4.new_code_cell("# a=false", metadata={"mystnb": "single-value"})
     )
-    with pytest.raises(RuntimeError, match="type"):
+    with pytest.raises(RuntimeError, match="Expected a dictionary!"):
         nb, _ = MetaDataMapInjectorPreprocessor(
             keys=["a"], metadata_group="mystnb"
         ).preprocess(nb, None)
