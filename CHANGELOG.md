@@ -1,3 +1,19 @@
+# v1.0.1 (Sun Jul 24 2022)
+
+#### 🐛 Bug Fix
+
+- Now build includes library [#9](https://github.com/kai-tub/common-nb-preprocessors/pull/9) ([@kai-tub](https://github.com/kai-tub))
+
+#### 🏠 Internal
+
+- Fix project URL in pyproject.toml [#8](https://github.com/kai-tub/common-nb-preprocessors/pull/8) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v1.0.0 (Thu Jul 21 2022)
 
 #### 💥 Breaking Change
