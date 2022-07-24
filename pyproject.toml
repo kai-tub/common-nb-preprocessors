@@ -31,7 +31,6 @@ build-backend = "pdm.pep517.api"
 # Currently it looks like a pdm bug that doesn't acknowledge
 # a different package-dir
 [tool.pdm.build]
-package-dir = "common_nb_preprocessors"
 includes = ["LICENSE", "common_nb_preprocessors"]
 
 # I _think_ the minimum myst-nb version for which this works
