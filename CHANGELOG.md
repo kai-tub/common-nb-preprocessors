@@ -1,3 +1,15 @@
+# v1.0.2 (Sun Jul 24 2022)
+
+#### 🐛 Bug Fix
+
+- Add yaml as explicit dependency [#10](https://github.com/kai-tub/common-nb-preprocessors/pull/10) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v1.0.1 (Sun Jul 24 2022)
 
 #### 🐛 Bug Fix
