@@ -15,6 +15,7 @@ dependencies = [
     "nbformat>=5.4.0",
     "nbconvert>=6.5.0",
     "pydantic>=1.9.1",
+    "pyyaml>=6.0",
 ]
 # deps-end
 
