@@ -28,8 +28,10 @@ documentation = "https://kai-tub.github.io/common-nb-preprocessors/"
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
 
+# Currently it looks like a pdm bug that doesn't acknowledge
+# a different package-dir
 [tool.pdm.build]
-includes = ["LICENSE"]
+includes = ["LICENSE", "common_nb_preprocessors"]
 
 # I _think_ the minimum myst-nb version for which this works
 # is v0.14, which was the big rewrite release
