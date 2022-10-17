@@ -1,3 +1,15 @@
+# v1.0.3 (Mon Oct 17 2022)
+
+#### 🐛 Bug Fix
+
+- Remove upper Python constraint [#11](https://github.com/kai-tub/common-nb-preprocessors/pull/11) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v1.0.2 (Sun Jul 24 2022)
 
 #### 🐛 Bug Fix
