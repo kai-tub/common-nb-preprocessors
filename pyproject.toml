@@ -10,7 +10,8 @@ readme = "README.md"
 
 #- Uses the < syntax instead of <= because conda-forge does not work correctly with <=
 # deps-start
-requires-python = ">=3.8"
+# FUTURE: Remove upper version constraint if pandas-stubs get updated!
+requires-python = ">=3.8, <3.11"
 dependencies = [
     "nbformat>=5.4.0",
     "nbconvert>=6.5.0",
@@ -72,7 +73,7 @@ dev = [
 ]
 mypy = [
     "types-PyYAML>=6.0.10",
-    # "pandas-stubs>=1.4.3.220718",
+    "pandas-stubs>=1.4.3.220718",
 ]
 
 [tool.mypy]
