@@ -1,3 +1,15 @@
+# v1.1.0 (Tue Oct 18 2022)
+
+#### 🚀 Enhancement
+
+- Allow optional setting of tags [#13](https://github.com/kai-tub/common-nb-preprocessors/pull/13) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v1.0.3 (Mon Oct 17 2022)
 
 #### 🐛 Bug Fix
