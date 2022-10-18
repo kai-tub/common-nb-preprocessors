@@ -5,12 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Credits" href="credits.html" /><link rel="prev" title="Preprocessors Reference" href="preprocessors.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.06.21"/>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>Utility Reference - Common NB Preprocessors documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -184,7 +183,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -207,6 +207,27 @@
 <dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.MystNBCellTags">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">common_nb_preprocessors.myst_nb.</span></span><span class="sig-name descname"><span class="pre">MystNBCellTags</span></span><a class="headerlink" href="#common_nb_preprocessors.myst_nb.MystNBCellTags" title="Permalink to this definition">#</a></dt>
 <dd><p>All different Myst-NB cell tag configuration options.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.MystNBCellTags.hide_input">
+<span class="sig-name descname"><span class="pre">hide_input</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'hide-input'</span></em><a class="headerlink" href="#common_nb_preprocessors.myst_nb.MystNBCellTags.hide_input" title="Permalink to this definition">#</a></dt>
+<dd><p>Hide the source code of the cell behind a collapsible button.
+See <a class="reference internal" href="usage.html#sec-hide-input"><span class="std std-ref">hide-input</span></a> for a visual example.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.MystNBCellTags.hide_output">
+<span class="sig-name descname"><span class="pre">hide_output</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'hide-output'</span></em><a class="headerlink" href="#common_nb_preprocessors.myst_nb.MystNBCellTags.hide_output" title="Permalink to this definition">#</a></dt>
+<dd><p>Hide the output of the cell behind a collapsible button.
+See <a class="reference internal" href="usage.html#sec-hide-output"><span class="std std-ref">hide-output</span></a> for a visual example.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.MystNBCellTags.hide_cell">
+<span class="sig-name descname"><span class="pre">hide_cell</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'hide-cell'</span></em><a class="headerlink" href="#common_nb_preprocessors.myst_nb.MystNBCellTags.hide_cell" title="Permalink to this definition">#</a></dt>
+<dd><p>Hide the input as well as the output of the cell behind a collapsible button.
+See <a class="reference internal" href="usage.html#sec-hide-cell"><span class="std std-ref">hide-cell</span></a> for a visual example.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.MystNBCellTags.remove_input">
 <span class="sig-name descname"><span class="pre">remove_input</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'remove-input'</span></em><a class="headerlink" href="#common_nb_preprocessors.myst_nb.MystNBCellTags.remove_input" title="Permalink to this definition">#</a></dt>
@@ -295,6 +316,28 @@ Should be paired with one of the following strings:</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.MystNBCellConf.code_prompt_show">
+<span class="sig-name descname"><span class="pre">code_prompt_show</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'code_prompt_show'</span></em><a class="headerlink" href="#common_nb_preprocessors.myst_nb.MystNBCellConf.code_prompt_show" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the prompt <em>text</em> that is displayed next to the
+<em>expand/show</em> dialog. The text is displayed to inform the user
+that the dialog can be expanded.</p>
+<p>The optional <code class="xref py py-obj docutils literal notranslate"><span class="pre">{type}</span></code> placeholder will be replaced with:
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">content</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">source</span></code>, or <code class="xref py py-obj docutils literal notranslate"><span class="pre">outputs</span></code>, depending on the <code class="xref py py-obj docutils literal notranslate"><span class="pre">hide</span></code> tag.</p>
+<p>See <a class="reference internal" href="usage.html#sec-code-prompt-show"><span class="std std-ref">code_prompt_show</span></a> for a visual example.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.MystNBCellConf.code_prompt_hide">
+<span class="sig-name descname"><span class="pre">code_prompt_hide</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'code_prompt_hide'</span></em><a class="headerlink" href="#common_nb_preprocessors.myst_nb.MystNBCellConf.code_prompt_hide" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the prompt <em>text</em> that is displayed next to the
+<em>hide</em> dialog. The text is displayed to inform the user
+that the dialog can be <em>collapsed/minimized</em>.</p>
+<p>The optional <code class="xref py py-obj docutils literal notranslate"><span class="pre">{type}</span></code> placeholder will be replaced with:
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">content</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">source</span></code>, or <code class="xref py py-obj docutils literal notranslate"><span class="pre">outputs</span></code>, depending on the <code class="xref py py-obj docutils literal notranslate"><span class="pre">hide</span></code> tag.</p>
+<p>See <a class="reference internal" href="usage.html#sec-code-prompt-hide"><span class="std std-ref">code_prompt_hide</span></a> for a visual example.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.MystNBCellConf.merge_streams">
 <span class="sig-name descname"><span class="pre">merge_streams</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'merge_streams'</span></em><a class="headerlink" href="#common_nb_preprocessors.myst_nb.MystNBCellConf.merge_streams" title="Permalink to this definition">#</a></dt>
 <dd><p>Merge standard output and standard error into a single output cell.
@@ -351,7 +394,7 @@ take a look at the <a class="reference external" href="https://myst-nb.readthedo
 
 <dl class="py function">
 <dt class="sig sig-object py" id="common_nb_preprocessors.myst_nb.myst_nb_metadata_injector">
-<span class="sig-prename descclassname"><span class="pre">common_nb_preprocessors.myst_nb.</span></span><span class="sig-name descname"><span class="pre">myst_nb_metadata_injector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'='</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common_nb_preprocessors.myst_nb.myst_nb_metadata_injector" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">common_nb_preprocessors.myst_nb.</span></span><span class="sig-name descname"><span class="pre">myst_nb_metadata_injector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_content</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'='</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#common_nb_preprocessors.myst_nb.myst_nb_metadata_injector" title="Permalink to this definition">#</a></dt>
 <dd><p>The preprocessor will inject all the MyST-NB specific tags into the
 metadata <code class="xref py py-obj docutils literal notranslate"><span class="pre">tags</span></code> and the cell level configuration to the <code class="xref py py-obj docutils literal notranslate"><span class="pre">mystnb</span></code> field.
 For an in-depth explanation of the different values, see the
@@ -362,6 +405,7 @@ For an in-depth explanation of the different values, see the
 <li><p><strong>file_content</strong> (<em>str</em>) – contents of an <code class="xref py py-obj docutils literal notranslate"><span class="pre">ipynb</span></code> file</p></li>
 <li><p><strong>prefix</strong> (<em>str</em>) – Comment symbol that precedes the keys. Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">#</span></code>.</p></li>
 <li><p><strong>remove_line</strong> (<em>bool</em>) – Set if the metadata comment lines should be removed after injection. Defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>extra_tags</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Additional custom <code class="xref py py-obj docutils literal notranslate"><span class="pre">tags</span></code> list for further customization.</p></li>
 <li><p><strong>delimiter</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
@@ -388,10 +432,10 @@ Refer to those classes for more details.</p>
                 </div>
                 <div class="title">Credits</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="preprocessors.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -437,10 +481,5 @@ Refer to those classes for more details.</p>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     </body>
 </html>

@@ -5,12 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Preprocessors Reference" href="preprocessors.html" /><link rel="prev" title="Installation" href="install.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.06.21"/>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.09.29"/>
         <title>MyST-NB Usage - Common NB Preprocessors documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=d81277517bee4d6b0349d71bb2661d4890b5617c" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -184,7 +183,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -225,7 +225,7 @@ This is especially frustrating for users that use UIs that do not support config
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nb_custom_formats</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;.ipynb&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;common_nb_preprocessors.myst_nb_metadata_injector&quot;</span><span class="p">,</span>
-        <span class="p">{</span><span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;=&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="s2">&quot;extra_tags&quot;</span><span class="p">:</span> <span class="p">[]},</span>
     <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
@@ -233,7 +233,8 @@ This is especially frustrating for users that use UIs that do not support config
 <p>The current version requires <em>you</em> to specify the <code class="docutils literal notranslate"><span class="pre">prefix</span></code> that indicates the start of a potential <em>magic comment</em>.
 Usually, this should be comment symbol(s) of the programming language.
 By default, and used in the example above, the <code class="docutils literal notranslate"><span class="pre">prefix=#</span></code> as this is the comment symbol for the Python programming language.
-The <code class="docutils literal notranslate"><span class="pre">delimiter</span></code> may be a character/string of your choice and will be used for separating key-value pairs.</p>
+The <code class="docutils literal notranslate"><span class="pre">delimiter</span></code> may be a character/string of your choice and will be used for separating key-value pairs.
+If you would like to add <em>additional</em> <a class="reference internal" href="#sec-tags-conf"><span class="std std-ref">tags</span></a> (when writing custom CSS rules, for example), you can also specify these as a list of strings in the <code class="docutils literal notranslate"><span class="pre">extra_tags</span></code> option.</p>
 <p>To see a list of all possible configuration, see the <a class="reference internal" href="utility_reference.html#common_nb_preprocessors.myst_nb.myst_nb_metadata_injector" title="common_nb_preprocessors.myst_nb.myst_nb_metadata_injector"><span class="xref myst py py-func">API documentation of mystnb_nb_metadata_injector</span></a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -294,9 +295,12 @@ You will see how this effects the configuration in the following sections.</p>
 <p>At the time of writing, the following configuration keywords can be set in the <code class="docutils literal notranslate"><span class="pre">tags</span></code> metadata entry of a Jupyter code-cell:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#sec-remove-input"><span class="std std-ref">remove-input</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-hide-input"><span class="std std-ref">hide-input</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-remove-stderr"><span class="std std-ref">remove-stderr</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-remove-output"><span class="std std-ref">remove-output</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-hide-output"><span class="std std-ref">hide-output</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-remove-cell"><span class="std std-ref">remove-cell</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-hide-cell"><span class="std std-ref">hide-cell</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-skip-execution"><span class="std std-ref">skip-execution</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-raises-exception"><span class="std std-ref">raises-exception</span></a></p></li>
 </ul>
@@ -338,6 +342,34 @@ Useful if you are only interested in the output.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My code cell is removed
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hide-input">
+<span id="sec-hide-input"></span><h3>hide-input<a class="headerlink" href="#hide-input" title="Permalink to this headline">#</a></h3>
+<p>Hide the source code of the cell behind a collapsible button.
+Useful if you want to draw the attention of the reader away from the code but still allow them to view the code if interested.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># hide-input</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My code cell is hidden behind a collapsible button.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My code cell is hidden behind a collapsible button.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My code cell is hidden behind a collapsible button.
 </pre></div>
 </div>
 </div>
@@ -394,6 +426,34 @@ Useful to hide some warning during important without having filter the messages 
 </div>
 </div>
 </section>
+<section id="hide-output">
+<span id="sec-hide-output"></span><h3>hide-output<a class="headerlink" href="#hide-output" title="Permalink to this headline">#</a></h3>
+<p>Hide the output of the code cell behind a collapsible button.
+This affects the entire output (<code class="docutils literal notranslate"><span class="pre">stderr</span></code> and <code class="docutils literal notranslate"><span class="pre">stdout</span></code>, like <a class="reference internal" href="#sec-remove-output"><span class="std std-ref">remove-output</span></a>).</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># hide-output</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My output is hidden behind a collapsible button.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My output is hidden behind a collapsible button.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My output is hidden behind a collapsible button.
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
 <section id="remove-cell">
 <span id="sec-remove-cell"></span><h3>remove-cell<a class="headerlink" href="#remove-cell" title="Permalink to this headline">#</a></h3>
 <p>Remove the input as well as the output of the code cell.</p>
@@ -407,6 +467,33 @@ Useful to hide some warning during important without having filter the messages 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The code-cell is still executed under the hood!</p>
+</div>
+</section>
+<section id="hide-cell">
+<span id="sec-hide-cell"></span><h3>hide-cell<a class="headerlink" href="#hide-cell" title="Permalink to this headline">#</a></h3>
+<p>Hide the input as well as the output of the code cell behind a collapsible button.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># hide-cell</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The input and output is hidden behind a collapsible button.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The input and output is hidden behind a collapsible button.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The input and output is hidden behind a collapsible button.
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 </section>
 <section id="raises-exception">
@@ -429,7 +516,7 @@ This is helpful, if you are showing examples of <em>failing</em> code and want t
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">Input In [8],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
 
 <span class="ne">ZeroDivisionError</span>: division by zero
@@ -463,6 +550,8 @@ This is helpful, if you are showing examples of <em>failing</em> code and want t
 <ul class="simple">
 <li><p><a class="reference internal" href="#sec-remove-code-source"><span class="std std-ref">remove_code_source</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-remove-code-outputs"><span class="std std-ref">remove_code_outputs</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-code-prompt-show"><span class="std std-ref">code_prompt_show</span></a></p></li>
+<li><p><a class="reference internal" href="#sec-code-prompt-hide"><span class="std std-ref">code_prompt_hide</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-number-source-lines"><span class="std std-ref">number_source_lines</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-output-stderr"><span class="std std-ref">output_stderr</span></a></p></li>
 <li><p><a class="reference internal" href="#sec-merge-streams"><span class="std std-ref">merge_streams</span></a></p></li>
@@ -515,6 +604,76 @@ This allows you to even set nested structures in a single line and is required f
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My output is removed&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;including the error output&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="code-prompt-show">
+<span id="sec-code-prompt-show"></span><h3>code_prompt_show<a class="headerlink" href="#code-prompt-show" title="Permalink to this headline">#</a></h3>
+<p>Prompt <em>text</em> that is displayed to inform the user that the dialog can be <em>expanded</em>.
+The optional <code class="docutils literal notranslate"><span class="pre">{type}</span></code> placeholder will be replaced with <code class="docutils literal notranslate"><span class="pre">content</span></code>, <code class="docutils literal notranslate"><span class="pre">source</span></code>, or <code class="docutils literal notranslate"><span class="pre">outputs</span></code>, depending on the <code class="docutils literal notranslate"><span class="pre">hide</span></code> tag (<a class="reference internal" href="#sec-hide-input"><span class="std std-ref">hide-input</span></a>, <a class="reference internal" href="#sec-hide-output"><span class="std std-ref">hide-output</span></a>, <a class="reference internal" href="#sec-hide-cell"><span class="std std-ref">hide-cell</span></a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Also requires the code cell to specify one of the <code class="docutils literal notranslate"><span class="pre">hide-X</span></code> options.</p>
+</div>
+<p>Mainly included for completeness.
+This would be an ideal example of a configuration value that should be set globally instead of individually within each code cell.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># hide-input</span>
+<span class="c1"># code_prompt_show = &quot;Click here to see my absolutely awesome {type}&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setting code_prompt_show&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Click here to see my absolutely awesome source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setting code_prompt_show&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Setting code_prompt_show
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="code-prompt-hide">
+<span id="sec-code-prompt-hide"></span><h3>code_prompt_hide<a class="headerlink" href="#code-prompt-hide" title="Permalink to this headline">#</a></h3>
+<p>Prompt <em>text</em> that is displayed to inform the user that the dialog can be <em>collapsed/minimized</em>.
+The optional <code class="docutils literal notranslate"><span class="pre">{type}</span></code> placeholder will be replaced with <code class="docutils literal notranslate"><span class="pre">content</span></code>, <code class="docutils literal notranslate"><span class="pre">source</span></code>, or <code class="docutils literal notranslate"><span class="pre">outputs</span></code>, depending on the <code class="docutils literal notranslate"><span class="pre">hide</span></code> tag (<a class="reference internal" href="#sec-hide-input"><span class="std std-ref">hide-input</span></a>, <a class="reference internal" href="#sec-hide-output"><span class="std std-ref">hide-output</span></a>, <a class="reference internal" href="#sec-hide-cell"><span class="std std-ref">hide-cell</span></a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Also requires the code cell to specify one of the <code class="docutils literal notranslate"><span class="pre">hide-X</span></code> options.</p>
+</div>
+<p>Mainly included for completeness.
+This would be an ideal example of a configuration value that should be set globally instead of individually within each code cell.</p>
+<p>Source:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># hide-input</span>
+<span class="c1"># code_prompt_hide = &quot;Click here to minimize my absolutely awesome {type} (What is wrong with it?! :( )&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expand the button above to see the text!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Click here to minimize my awesome source (What is wrong with it?! 🥲)</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expand the button above to see the hide prompt!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Expand the button above to see the hide prompt!
 </pre></div>
 </div>
 </div>
@@ -695,7 +854,7 @@ Note, that to be able to correctly build the documentation, the following exampl
 <div class="cell_output docutils container">
 <div class="output traceback highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
 <span class="ne">Exception</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">cell</span> <span class="n">line</span><span class="p">:</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="o">----&gt;</span> <span class="mi">1</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
       <span class="mi">2</span>     <span class="s2">&quot;# The last line be lexed as a Python comment, everything else will be broken&quot;</span>
       <span class="mi">3</span> <span class="p">)</span>
@@ -899,10 +1058,10 @@ So instead of writing a long line like the following:</p>
                 </div>
                 <div class="title">Preprocessors Reference</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="install.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -943,7 +1102,7 @@ So instead of writing a long line like the following:</p>
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            Contents
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">
@@ -955,9 +1114,12 @@ So instead of writing a long line like the following:</p>
 <li><a class="reference internal" href="#tag-configuration">Tag configuration</a><ul>
 <li><a class="reference internal" href="#no-match-example">no-match example</a></li>
 <li><a class="reference internal" href="#remove-input">remove-input</a></li>
+<li><a class="reference internal" href="#hide-input">hide-input</a></li>
 <li><a class="reference internal" href="#remove-stderr">remove-stderr</a></li>
 <li><a class="reference internal" href="#remove-output">remove-output</a></li>
+<li><a class="reference internal" href="#hide-output">hide-output</a></li>
 <li><a class="reference internal" href="#remove-cell">remove-cell</a></li>
+<li><a class="reference internal" href="#hide-cell">hide-cell</a></li>
 <li><a class="reference internal" href="#raises-exception">raises-exception</a></li>
 <li><a class="reference internal" href="#skip-execution">skip-execution</a></li>
 </ul>
@@ -965,6 +1127,8 @@ So instead of writing a long line like the following:</p>
 <li><a class="reference internal" href="#myst-nb-metadata-configuration">Myst-NB Metadata Configuration</a><ul>
 <li><a class="reference internal" href="#remove-code-source">remove_code_source</a></li>
 <li><a class="reference internal" href="#remove-code-outputs">remove_code_outputs</a></li>
+<li><a class="reference internal" href="#code-prompt-show">code_prompt_show</a></li>
+<li><a class="reference internal" href="#code-prompt-hide">code_prompt_hide</a></li>
 <li><a class="reference internal" href="#number-source-lines">number_source_lines</a></li>
 <li><a class="reference internal" href="#output-stderr">output_stderr</a></li>
 <li><a class="reference internal" href="#merge-streams">merge_streams</a></li>
@@ -992,10 +1156,5 @@ So instead of writing a long line like the following:</p>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     </body>
 </html>
