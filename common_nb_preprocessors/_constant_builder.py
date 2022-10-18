@@ -1,12 +1,14 @@
 try:
+    # TODO: check set html5lib as dependency
     import bs4  # type: ignore
     import html5lib  # type: ignore
+    import lxml  # type: ignore
     import pandas
 except ImportError:
     raise ImportError(
         """\
         This module is only used during development and requires
-        pandas + the `read_html` dependencies (bs4 and html5lib).
+        pandas + the `read_html` dependencies (bs4, html5lib, and lxml).
         """
     )
 

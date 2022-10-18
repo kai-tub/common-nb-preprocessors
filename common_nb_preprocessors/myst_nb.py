@@ -1,6 +1,8 @@
 from enum import Enum
+from typing import List, Optional
 
 import nbformat
+from pydantic import validate_arguments
 
 from .metadata_injector import (
     MetaDataListInjectorPreprocessor,
@@ -19,6 +21,21 @@ class MystNBCellTags(str, Enum):
     All different Myst-NB cell tag configuration options.
     """
 
+    hide_input = "hide-input"
+    """
+    Hide the source code of the cell behind a collapsible button.
+    See :ref:`sec/hide-input` for a visual example.
+    """
+    hide_output = "hide-output"
+    """
+    Hide the output of the cell behind a collapsible button.
+    See :ref:`sec/hide-output` for a visual example.
+    """
+    hide_cell = "hide-cell"
+    """
+    Hide the input as well as the output of the cell behind a collapsible button.
+    See :ref:`sec/hide-cell` for a visual example.
+    """
     remove_input = "remove-input"
     """
     Removes the source code of the cell.
@@ -69,7 +86,8 @@ class MystNBCellTags(str, Enum):
         cell_tags = _myst_nb_cell_tags["Tag"].tolist()
         _nbclient_cell_tags = _read_unique_myst_nb_table(match="skip-execution")
         cell_tags.extend(_nbclient_cell_tags["Tag"].tolist())
-        if set(cell_tags) != set(cls):
+        # if some aren't documented yet, which has happened quite often
+        if set(cell_tags) - set(cls) != set():
             raise RuntimeError(f"{cls} out-of-date!")
 
 
@@ -111,6 +129,28 @@ class MystNBCellConf(str, Enum):
     - `warn`/`error`/`severe`: Log the error with a specific logging level to Sphinx
 
     See :ref:`sec/output_stderr` for a visual example.
+    """
+    code_prompt_show = "code_prompt_show"
+    """
+    Define the prompt *text* that is displayed next to the
+    *expand/show* dialog. The text is displayed to inform the user
+    that the dialog can be expanded.
+
+    The optional `{type}` placeholder will be replaced with:
+    `content`, `source`, or `outputs`, depending on the `hide` tag.
+
+    See :ref:`sec/code_prompt_show` for a visual example.
+    """
+    code_prompt_hide = "code_prompt_hide"
+    """
+    Define the prompt *text* that is displayed next to the
+    *hide* dialog. The text is displayed to inform the user
+    that the dialog can be *collapsed/minimized*.
+
+    The optional `{type}` placeholder will be replaced with:
+    `content`, `source`, or `outputs`, depending on the `hide` tag.
+
+    See :ref:`sec/code_prompt_hide` for a visual example.
     """
 
     merge_streams = "merge_streams"
@@ -186,35 +226,14 @@ class MystNBCellConf(str, Enum):
             raise RuntimeError(f"{cls} out-of-date!")
 
 
-# MYST_NB_CELL_CONF = [
-#     "merge_streams",
-#     "remove_code_source",
-#     "remove_code_outputs",
-#     "number_source_lines",
-#     "output_stderr",
-#     "text_lexer",
-#     "error_lexer",
-#     "image",
-#     "figure",
-#     "markdown_format",
-# ]
-
-# JUPYTER_BOOK_CODE_TAGS = [
-#     "full-width",
-#     "output_scroll",
-#     "margin",
-#     "hide-input",
-#     "hide-output",
-#     "hide-cell",
-#     "remove-input",
-#     "remove-output",
-#     "remove-cell",
-#     "raises-exception",
-# ]
-
-
+@validate_arguments()
 def myst_nb_metadata_injector(
-    file_content: str, prefix: str = "#", remove_line: bool = True, delimiter: str = "="
+    file_content: str,
+    /,
+    prefix: str = "#",
+    remove_line: bool = True,
+    delimiter: str = "=",
+    extra_tags: Optional[List[str]] = None,
 ) -> nbformat.NotebookNode:
     """
     The preprocessor will inject all the MyST-NB specific tags into the
@@ -225,16 +244,21 @@ def myst_nb_metadata_injector(
     :param file_content: contents of an `ipynb` file
     :param prefix: Comment symbol that precedes the keys. Defaults to `#`.
     :param remove_line: Set if the metadata comment lines should be removed after injection. Defaults to `True`.
+    :param extra_tags: Additional custom `tags` list for further customization.
 
     Internally it calls `MetaDataListInjectorPrepreprocessor` and
     `MetaDataMapInjectorPreprocessor`.
     Refer to those classes for more details.
     """
     nb = nbformat.reads(file_content, as_version=4)
+    metadata_tags = set(s.value for s in MystNBCellTags)
+    if extra_tags is not None:
+        metadata_tags = metadata_tags | set(extra_tags)
+
     # could be done in one preprocess step
     nb, _ = MetaDataListInjectorPreprocessor(
         metadata_group="tags",
-        strings=list(MystNBCellTags),
+        strings=list(metadata_tags),
         prefix=prefix,
         remove_line=remove_line,
     ).preprocess(nb, None)
