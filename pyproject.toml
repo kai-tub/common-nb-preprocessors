@@ -11,7 +11,9 @@ readme = "README.md"
 #- Uses the < syntax instead of <= because conda-forge does not work correctly with <=
 # deps-start
 # FUTURE: Remove upper version constraint if pandas-stubs get updated!
-requires-python = ">=3.8, <3.11"
+# Nope, I am not willing to 'infect' my maximum requirements and
+# code-base for two pandas-stubs
+requires-python = ">=3.8"
 dependencies = [
     "nbformat>=5.4.0",
     "nbconvert>=6.5.0",
@@ -33,7 +35,7 @@ build-backend = "pdm.pep517.api"
 # Currently it looks like a pdm bug that doesn't acknowledge
 # a different package-dir
 [tool.pdm.build]
-includes = ["LICENSE", "common_nb_preprocessors"]
+includes = ["LICENSE", "src"]
 
 # I _think_ the minimum myst-nb version for which this works
 # is v0.14, which was the big rewrite release
@@ -73,7 +75,7 @@ dev = [
 ]
 mypy = [
     "types-PyYAML>=6.0.10",
-    "pandas-stubs>=1.4.3.220718",
+    # "pandas-stubs>=1.4.3.220718",
 ]
 
 [tool.mypy]
@@ -89,8 +91,7 @@ ignore_missing_imports = true
 profile = "black"
 
 [tool.pdm.scripts]
-black = "black ."
-isort = "isort ."
+check-pre-commit = "pre-commit run --all-files"
 tests = "coverage run --parallel --source common_nb_preprocessors -m pytest tests"
 # manually adjust per project the fail-under settings
 coverage_report.composite = [
@@ -99,11 +100,10 @@ coverage_report.composite = [
 ]
 coverage_html_report = "coverage html"
 
-check_types = "mypy common_nb_preprocessors"
+check-types = "mypy src"
 lint.composite = [
-    "black",
-    "isort",
-    "check_types",
+    "check-pre-commit",
+    "check-types",
 ]
 lint.help = "Will check if all files are formatted with black & isort"
 
