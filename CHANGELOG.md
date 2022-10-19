@@ -1,3 +1,15 @@
+# v1.1.1 (Wed Oct 19 2022)
+
+#### 🐛 Bug Fix
+
+- Move source and fix check-pre-commit + remove upper python constraint [#14](https://github.com/kai-tub/common-nb-preprocessors/pull/14) ([@kai-tub](https://github.com/kai-tub))
+
+#### Authors: 1
+
+- Kai Norman Clasen ([@kai-tub](https://github.com/kai-tub))
+
+---
+
 # v1.1.0 (Tue Oct 18 2022)
 
 #### 🚀 Enhancement
