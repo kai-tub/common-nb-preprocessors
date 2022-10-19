@@ -84,7 +84,7 @@ exclude = ["tests"]
 # plugins = "numpy.typing.mypy_plugin"
 
 [[tool.mypy.overrides]]
-module = "nbconvert.*"
+module = ["nbconvert.*", "pandas.*"]
 ignore_missing_imports = true
 
 [tool.isort]
