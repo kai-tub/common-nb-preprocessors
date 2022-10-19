@@ -201,7 +201,9 @@
           <section class="tex2jax_ignore mathjax_ignore" id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h1>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="c1"># FUTURE: Remove upper version constraint if pandas-stubs get updated!</span><span class="w"></span>
-<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&gt;=3.8, &lt;3.11&quot;</span><span class="w"></span>
+<span class="c1"># Nope, I am not willing to &#39;infect&#39; my maximum requirements and</span><span class="w"></span>
+<span class="c1"># code-base for two pandas-stubs</span><span class="w"></span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&gt;=3.8&quot;</span><span class="w"></span>
 <span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="s">&quot;nbformat&gt;=5.4.0&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="s">&quot;nbconvert&gt;=6.5.0&quot;</span><span class="p">,</span><span class="w"></span>
